@@ -1,0 +1,27 @@
+{# CONTAINER #}
+<div id="{{ name }}" class="container-banner">
+  {# IMAGE BACKGROUND #}
+  <div style="min-height:210px;background-image: url('{{ module.field_group.background.src }}'); background-repeat: no-repeat;background-size: cover;background-position: center center;" class="container-baner__image">
+      {# DATE LEFT #} 
+      <div style="display:inline-block;margin-top:15px;margin-left:40px;margin-right:100px" class="container-banner__date">
+        {% inline_rich_text field="field_group.rich_text" value="{{ module.field_group.rich_text }}" %}
+      </div>
+      {# LINK  RIGHT#} 
+      <div style="margin-left:40px;margin-top:15px;display:inline-block;" class="container-banner__link">
+        {% inline_rich_text field="field_group.links" value="{{ module.field_group.links }}" %}
+      </div>      
+       {# Image #}
+       <div style="text-align:right;margin-top:11%">
+        {% if module.field_group.image_field.src %}
+          {% set sizeAttrs = 'width="{{ module.field_group.image_field.width }}" height="{{ module.field_group.image_field.height }}"' %}
+          {% if module.field_group.image_field.size_type == 'auto' %}
+            {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+          {% elif module.field_group.image_field.size_type == 'auto_custom_max' %}
+            {% set sizeAttrs = 'width="{{ module.field_group.image_field.max_width }}" height="{{ module.field_group.image_field.max_height }}" style="max-width: 100%; height: auto;"' %}
+          {% endif %}
+           {% set loadingAttr = module.field_group.image_field.loading != 'disabled' ? 'loading="{{ module.field_group.image_field.loading }}"' : '' %}
+          <img src="{{ module.field_group.image_field.src }}" alt="{{ module.field_group.image_field.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+        {% endif %}
+      </div>
+    </div>
+</div>

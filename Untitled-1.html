@@ -1,0 +1,31 @@
+-->
+<!doctype html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <title>{{ content.html_title }}</title>
+    <meta name="description" content="{{ content.meta_description }}">
+    {{ standard_header_includes }}
+    {{ require_css(get_asset_url("/Roleshare_February2020 Theme/Coded Files/Roleshare_February2020-style.css")) }}
+    {{ require_css(get_asset_url("/Roleshare_February2020 Theme/Coded Files/layout.css")) }}
+    {{ require_css(get_asset_url("/Roleshare_February2020 Theme/Coded Files/_dnd_areas.css")) }}
+    
+  </head>
+  <body>
+    {{ require_js(get_asset_url("/Roleshare_February2020 Theme/Coded Files/Roleshare_February2020-main.js")) }}    
+    {% block header %}
+        {% global_partial path="/generated_global_groups/75311532657.html" %}
+      {% endblock header %}  
+
+      <main class="body-container-wrapper">
+        {% dnd_area "dnd_area" class='body-container', label='Main section' %}{% end_dnd_area %}
+      </main>
+    <footer id="footer">
+      {% block footer %}
+        {% global_partial path="/generated_global_groups/75311612928.html" %}
+      {% endblock footer %}
+    {{ standard_footer_includes }}
+    </footer>     
+  </body>
+</html>

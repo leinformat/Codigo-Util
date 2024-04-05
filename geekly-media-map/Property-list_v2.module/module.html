@@ -1,0 +1,852 @@
+
+{% set propertyTypes =
+    {
+    "Single Family House":"singlefamily_house",
+    "Townhouse":"townhouse",
+    "Apartment":"apartment",
+    "Duplex":"duplex"
+    }
+%} 
+
+{% set features =
+    {
+    "Pets Allowed":"pets_allowed",
+    "Built In Wardrobes":"built_in_wardrobes",
+    "Gas":"gas",
+    "Heating":"heating",
+    "Balcony":"balcony",
+    "Garden":"garden",
+    "Stydy":"stydy",
+    "Laundry":"laundry",
+    "Dishwasher":"dishwasher",
+    "Airconditioning":"airconditioning"
+    }
+%}
+
+{% set sqfts = ["0","250","500","750","1000","1250","1500","1750","2000","2250","2500","2750","3000","3250","3500","3750","4000","4250","4500","4750","5000"] %}
+
+{% set cardsList = [] %}
+
+{% for item in module.box_group %}
+{% set house = "house_"~ loop.index %}
+{% set cardDictionary =
+          {
+            "picture": resize_image_url(item.image_field.src, 0, 0, 230),
+            "picture_alt": item.image_field.alt,
+            "title": item.title,
+            "price": item.price,
+            "description": item.sub_title,
+            "city": item.city,
+            "state": item.state,
+            "beds": item.product.beds,
+            "baths": item.product.baths,
+            "area": item.product.sqft,
+            "button_1_link": item.button_1.link.href,
+            "button_2_link": item.button_2.link.href,
+            "button_1_label": item.button_1.button_label,
+            "button_2_label": item.button_2.button_label,
+            "properties": item.properties,
+            "features": item.features,
+            "latitude": item.coordinates.latitude,
+            "longitude": item.coordinates.longitude,
+            "internal_page_link":  item.internal_page_link.href
+          }
+     %}   
+{% do cardsList.append(cardDictionary) %}
+{% endfor %}
+{% set cardsJSON = cardsList|tojson %}
+{% require_css %}
+<style>
+  {% scope_css %}
+
+  .rents_row_icons > span{
+    padding-left: 35px;
+  }
+
+  .rents_row_icons .bed .rents_row_icons__icon,
+  .map-marker-popup__beds .map-marker-popup__icon{
+    background-image: url({{ module.style.icons.bed_icon.src }});
+  }
+  .rents_row_icons .bath .rents_row_icons__icon,
+  .map-marker-popup__baths .map-marker-popup__icon{ 
+    background-image: url({{ module.style.icons.bath_icon.src }}); 
+  }
+  .rents_row_icons .sqft .rents_row_icons__icon,
+  .map-marker-popup__sqft .map-marker-popup__icon{ 
+    background-image: url({{ module.style.icons.sqft_icon.src }}); 
+  }
+
+  .rentale_serach_column{
+    {% if module.style.cards_animation == 'zoomIn' %}
+    transform: scale(0);
+    {% elif module.style.cards_animation == 'fadeIn' %}
+    opacity: 0;
+    {% endif %}
+  }
+
+  .rentale_serach_column--animate {
+    animation-name: {{ module.style.cards_animation }};
+  }
+
+  {% end_scope_css %}
+</style>
+{% end_require_css %} 
+
+
+
+
+{# ****** Card that will be cloned, filled and rendered  ******#}
+<div class="rentale-model-card">
+  <div class="rentale_serach_column">
+    <div class="rents_image">
+      <a class="rentale-model-card__internal-link" href="#"></a>
+      <img src="" alt="" loading="lazy">
+    </div>
+    <div class="rents_search_details">
+      <div class="rents_innerdetails">
+        <a class="rents_innerdetails__link" href="#">
+          <h3></h3>
+        </a>
+        <div class="rents_text"> </div>
+        <div class="rents_row_icons">
+          <div class="bed">  
+            <span class="rents_row_icons__icon"></span>
+            <p></p>                          
+          </div>
+          <div class="bath">   
+            <span class="rents_row_icons__icon"></span>
+            <p></p>
+          </div>
+          <div class="sqft">   
+            <span class="rents_row_icons__icon"></span>
+            <p></p>
+          </div>                        
+        </div>
+        <div class="rents_price"> </div>
+      </div>
+      <div class="bottom_btn">
+        <div class="btn_style1">                               
+          <a href="" target="_blank" > </a>
+        </div>
+        <div class="btn_style2">                             
+          <a href="" target="_blank"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{# ****** END - Card that will be cloned, filled and rendered  ******#}
+
+<section class="rental_list_map {{ module.custom_class }}" id="{{ module.section_id }}">
+  <div class="container">
+    <div class="serach_title">
+      <h1> {{ module.heading }} </h1>
+    </div>
+    <div class="rental_tab">
+      <div class="tab">
+        <div class="tab_list_inner">
+          <div class="tab_list">
+            <ul>
+              <li class="tab_list__cards">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19.889" height="19.889" viewBox="0 0 19.889 19.889"> <path id="Icon_ionic-md-apps" data-name="Icon ionic-md-apps" d="M6.75,11.722h4.972V6.75H6.75Zm7.458,14.917H19.18V21.667H14.208Zm-7.458,0h4.972V21.667H6.75Zm0-7.458h4.972V14.208H6.75Zm7.458,0H19.18V14.208H14.208ZM21.667,6.75v4.972h4.972V6.75Zm-7.458,4.972H19.18V6.75H14.208Zm7.458,7.458h4.972V14.208H21.667Zm0,7.458h4.972V21.667H21.667Z" transform="translate(-6.75 -6.75)" fill="#c2c2c5"></path> </svg>
+                </div> 
+                List
+              </li>
+              <li class="tab_list__map">
+                <div class="icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18.05" height="25.785" viewBox="0 0 18.05 25.785"> <path id="Icon_material-location-on" data-name="Icon material-location-on" d="M16.525,3A9.018,9.018,0,0,0,7.5,12.025c0,6.769,9.025,16.761,9.025,16.761s9.025-9.992,9.025-16.761A9.018,9.018,0,0,0,16.525,3Zm0,12.248a3.223,3.223,0,1,1,3.223-3.223A3.224,3.224,0,0,1,16.525,15.248Z" transform="translate(-7.5 -3)" fill="#c2c2c5"></path> </svg>
+                </div> 
+                Map
+              </li>
+            </ul>
+          </div>
+          <div class="tab_right">
+            <div class="content content__results"></div>            
+          </div>
+        </div>
+
+        <div class="rental_left_right">
+          <div class="rental_filter"> 
+            <form class="filters__form">
+              <div class="inner">
+                <div class="top">
+                  <h3>Filter</h3>                  
+                  <div class="button filters__reset-form">Reset All</div>                  
+                </div>
+                <ul class="box_dropdown">
+                  {# ****** City and State Filters  ******#}
+                  <li class="dropdown_form"> 
+                    <div class="box" id="box">
+                      <label>City</label>
+                      <input type="text" placeholder="City" id="city" name="city">                                        
+                    </div>
+
+                    <div class="box" id="box">
+                      <label>State</label>
+                      <input type="text" placeholder="State" id="state" name="state">                       
+                    </div>
+                  </li>
+                  {# ****** End City and State Filters  ******#}
+
+                  <div class="border"></div>
+                  {# ****** Price Filters  ******#}   
+                  <li class="dropdown_form">
+                    <div class="box" id="box">
+                      <label>Price Min</label>
+                      <input type="number" class="prices"  placeholder="Min Price" id="priceMin" name="price">
+                    </div>
+                    <div class="box" id="box">
+                      <label>Price Max</label>                      
+                      <input type="number" class="prices"  placeholder="Max Price" id="priceMax" name="price">
+                    </div>
+                  </li>
+
+                  {# ****** Bedrooms Filters  ******#}
+                  <li class="dropdown_form">
+                    <div class="box" id="box">
+                      <label>Bedrooms Min</label>
+                      <select id="minBeds">  
+                        <option value="">Any</option>
+                        {% for number in range(0,7) %}
+                        <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}                     
+                      </select>
+                    </div>
+                    <div class="box" id="box">
+                      <label>Bedrooms Max</label>
+                      <select id="maxBeds">                      
+                        <option value="">Any</option>
+                        {% for number in range(0,7) %}
+                        <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %} 
+                      </select>
+                    </div>
+                  </li>
+                  {# ****** End Bedrooms Filters  ******#}
+
+                  {# ****** Bathrooms Filters  ******#}
+                  <li class="dropdown_form">
+                    <div class="box" id="box">
+                      <label>Bathrooms Min</label>
+                      <select id="minBaths">  
+                        <option value="">Any</option>
+                        {% for number in range(0,6) %}
+                        <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %} 
+                      </select>
+                    </div>
+                    <div class="box" id="box">
+                      <label>Bathrooms Max</label>
+                      <select id="maxBaths">
+                        <option value="">Any</option>
+                        {% for number in range(0,6) %}
+                        <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %} 
+                      </select>
+                    </div>
+                  </li>
+                  {# ****** End Bathrooms Filters  ******#}
+
+                  {# ****** Sqft Filters  ******#}
+                  <li class="dropdown_form">
+                    <div class="box" id="box">
+                      <label>Sqft Min</label>
+                      <select id="minArea">  
+                        <option value="">Any</option>
+                        {% for sqft in sqfts %}
+                        <option value="{{ sqft }}">{{ sqft }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="box" id="box">
+                      <label>Sqft Max</label>
+                      <select id="maxArea">
+                        <option value="">Any</option>
+                        {% for sqft in sqfts %}
+                        <option value="{{ sqft }}">{{ sqft }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </li>
+                  {# ****** End Sqft Filters  ******#}
+
+                  
+                  {# ****** ENDPrice Filters  ******#}  
+                  <div class="border"></div>
+                </ul>
+
+                {# ****** Property Type filters   ******#}
+                <div class="property_type">
+                  <div class="filter_title">
+                    <h6>Property Type</h6>
+                  </div>
+                  <div class="filter_checkbox">
+                    {% for property,value in propertyTypes.items() %}                      
+                    <div class="property_checkbox filter_checkbox">
+                      <input type="checkbox" name="property" value="{{ value }}" data-value="{{ value }}"/>
+                      <label for="{{ value }}">{{ property }}</label>
+                    </div>
+                    {% endfor %}                    
+                  </div>
+                </div>
+                <div class="border"></div>
+                {# ****** End Property Type filters   ******#}
+
+
+                {# ****** Features filters   ******#}
+                <div class="feature_type">
+                  <div class="filter_title">
+                    <h6>Features</h6>
+                  </div>                 
+                  <div class="filter_checkbox">
+                    {% for feature,value in features.items() %}
+                    <div class="property_checkbox filter_checkbox">
+                      <input type="checkbox" value="{{ value }}" name="feature" data-value="{{ value }}" />
+                      <label for="{{ value }}">{{ feature }}</label>
+                    </div>
+                    {% endfor %}
+                  </div>                 
+                </div>
+                <div class="border"></div>
+                {# ****** End Features filters   ******#}
+
+                {# ****** Keywords filter  ******#}
+                <div class="keyword">
+                  <div class="filter_title">
+                    <h6>Keywords</h6>                   
+                    <div class="icon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="keywords"  placeholder="Search for keywords or tags" id="search" name="search">
+                  </div>
+                </div>
+                {# ****** End Keywords filter  ******#}
+                
+              </div>
+            </form>
+          </div>
+
+          <div class="rental_content_list">
+            <div class="rental_content">
+              <div class="inner">
+                {% for item in module.box_group %}
+                <div class="rentale_serach_column">
+                  <div class="rents_image">
+                    {% if item.image_field.src %}                    
+                    {% set loadingAttr = item.image_field.loading != 'disabled' ? 'loading="{{ item.image_field.loading }}"' : '' %}
+                    <img src="{{ item.image_field.src }}" alt="{{ item.image_field.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                    {% endif %}
+                  </div>
+                  <div class="rents_search_details">
+                    <div class="rents_innerdetails">
+                      <h3> {{ item.title }}</h3>
+                      <div class="rents_text">
+                        {{ item.sub_title }}
+                      </div>
+                      <div class="rents_row_icons">
+                        <div class="bed">  
+                          <span class="rents_row_icons__icon"></span>
+                          <p> {{ item.product.beds }} bed </p>                          
+                        </div>
+                        <div class="bath">   
+                          <span class="rents_row_icons__icon"></span>
+                          <p> {{ item.product.baths }} bath </p>
+                        </div>
+                        <div class="sqft">   
+                          <span class="rents_row_icons__icon"></span>
+                          <p> {{ item.product.sqft }} Sqft </p>
+                        </div>                        
+                      </div>
+                      <div class="rents_price">
+                        {{ item.price|format_currency('en-US') }}
+                      </div>
+                    </div>
+                    <div class="bottom_btn">
+                      <div class="btn_style1">                                            
+                        <a href="{{ item.button_1.link.href }}" target="_blank" > {{ item.button_1.button_label }} </a>
+                      </div>
+                      <div class="btn_style2">                                             
+                        <a href="{{ item.button_2.link.href }}" target="_blank" > {{ item.button_2.button_label }} </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="rental_content__pagination">  
+              </div>
+            </div>
+            <div class="rental_content rental_content__map">
+              <div class="map" id="map"> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</section>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ module.api_key_google }}"></script>
+
+
+
+{% require_js %}
+<script>
+
+  // Initialize the map
+  function initMap(arrayCards) {
+    const mapElement = document.getElementById('map');
+    if (!mapElement) {
+      return;
+    }
+    
+
+    const infowindow = new google.maps.InfoWindow({
+      content: `
+<div class="map-marker-popup">
+  <img src="https://www.geeklymedia.com/hubfs/Large%20suburban%20house.jpg" class="map-marker-popup__image">
+  <div class="map-marker-popup__content">
+    <h3></h3> 
+    <p></p>
+    <div class="map-marker-popup__properties">
+      <div class="map-marker-popup__beds">  
+        <span class="map-marker-popup__icon"></span>
+        <p> </p>                          
+      </div>
+      <div class="map-marker-popup__baths">   
+        <span class="map-marker-popup__icon"></span>
+        <p> </p>
+      </div>
+      <div class="map-marker-popup__sqft">   
+        <span class="map-marker-popup__icon"></span>
+        <p> </p>
+      </div>                        
+    </div> 
+    <div class="map-marker-popup__price"></div>
+  </div>
+  <a class="map-marker-popup__button" href="">  Schedule Viewing </a>
+</div>
+`,
+      maxWidth: 400
+    });
+    
+    // Close modal by clicking anywhere on the map.
+    function closeInfoMap(){
+      google.maps.event.addListener(map, "click", function(event) {
+        infowindow.close();
+      });
+    }
+    const markers = arrayCards.map((card) => {
+      const { latitude, longitude, title, picture,picture_alt, description, beds, baths, area, button_1_link, price } = card;
+      const position = { lat: Number(latitude), lng: Number(longitude) };
+      const marker = new google.maps.Marker({
+        position,
+        title,
+        map: null,
+      });
+
+      marker.addListener('mouseover', () => {
+        const content = `
+<div class="map-marker-popup">
+  <img src="${picture}" class="map-marker-popup__image" alt="${picture_alt}">
+  <div class="map-marker-popup__content">
+    <h3>
+      ${title}
+    </h3> 
+    <p>
+      ${description}
+    </p>
+    <div class="map-marker-popup__properties">
+      <div class="map-marker-popup__beds">  
+        <span class="map-marker-popup__icon"></span>
+        <p>  ${beds} beds </p>                          
+      </div>
+      <div class="map-marker-popup__baths">   
+        <span class="map-marker-popup__icon"></span>
+        <p> ${baths} baths </p>
+      </div>
+      <div class="map-marker-popup__sqft">   
+        <span class="map-marker-popup__icon"></span>
+        <p> ${area} Sqft </p>
+      </div>                        
+    </div>  
+    <div class="map-marker-popup__price"> $${price}</div>
+  </div>
+  <a class="map-marker-popup__button" href="${button_1_link}">  Schedule Viewing </a>
+</div>
+`;
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+        
+        // Close modal by clicking anywhere on the map.
+        closeInfoMap();
+      });
+      
+      marker.addListener('click', () => {
+        const content =`
+<div class="map-marker-popup">
+  <img src="${picture}" class="map-marker-popup__image" alt="${picture_alt}">
+  <div class="map-marker-popup__content">
+    <h3>
+      ${title}
+    </h3> 
+    <p>
+      ${description}
+    </p>
+    <div class="map-marker-popup__properties">
+      <div class="map-marker-popup__beds">  
+        <span class="map-marker-popup__icon"></span>
+        <p>  ${beds} beds </p>                          
+      </div>
+      <div class="map-marker-popup__baths">   
+        <span class="map-marker-popup__icon"></span>
+        <p> ${baths} baths </p>
+      </div>
+      <div class="map-marker-popup__sqft">   
+        <span class="map-marker-popup__icon"></span>
+        <p> ${area} Sqft </p>
+      </div>                        
+    </div>
+    <div class="map-marker-popup__price"> $${price}</div>
+  </div>
+  <a class="map-marker-popup__button" href="${button_1_link}">  Schedule Viewing </a>
+</div>
+`;
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+        
+        // Close modal by clicking anywhere on the map.
+        closeInfoMap();
+      });     
+
+      return marker;
+    });
+
+    const center = markers.length > 0
+    ? { lat: Number(arrayCards[0].latitude), lng: Number(arrayCards[0].longitude) }
+    : {lat: 44.96, lng: -103.77};
+
+    const zoom = markers.length > 0
+    ? 11
+    : 0;
+
+    const map = new google.maps.Map(mapElement, {
+      zoom: zoom,
+      center: center,
+    });
+      
+
+    markers.forEach((marker) => {
+      marker.setMap(map);
+    });
+    
+     var bounds = new google.maps.LatLngBounds();
+
+    // Loop through all markers and add their position to the bounds object
+    for (var i = 0; i < markers.length; i++) {
+      bounds.extend(markers[i].getPosition());
+    }
+
+    // Fit the map to the bounds object
+    map.fitBounds(bounds);
+  }
+  
+  
+  // Function to Render Cards that were filtered
+  function renderCards(arrayCards, cardsContainer, cardModel) {
+
+    // Create a document fragment and an array to hold HTML card elements
+    const fragment = document.createDocumentFragment();
+    const cardsHtml = [];
+
+    // Check if the input is an array and has elements
+    if (Array.isArray(arrayCards) && arrayCards.length > 0) {
+      for (const [index, card] of arrayCards.entries()) {
+        const {
+          picture,
+          picture_alt,
+          title,
+          price,
+          description,
+          beds,
+          baths,
+          area,
+          button_1_label,
+          button_1_link,
+          button_2_label,
+          button_2_link,
+          internal_page_link,
+        } = card;
+
+        // Clone the card model template
+        const clonedCard = cardModel.cloneNode(true);
+
+        // Add animation clases to the card template
+        clonedCard.classList.add('rentale_serach_column--animate');
+        clonedCard.classList.add(`rentale_serach_column--animate-delay${index + 1}`);
+
+        // Populate the cloned card with data
+        clonedCard.querySelector('.rents_image img').src = picture;
+        clonedCard.querySelector('.rents_image img').alt = picture_alt;
+        clonedCard.querySelector('.rentale-model-card__internal-link').href = internal_page_link;
+        clonedCard.querySelector('.rents_innerdetails__link').href = internal_page_link;
+        clonedCard.querySelector('.rents_innerdetails h3').textContent = title;
+        clonedCard.querySelector('.rents_innerdetails .rents_price').textContent = '$ ' + price;
+        clonedCard.querySelector('.rents_innerdetails .rents_text').textContent = description;
+        clonedCard.querySelector('.rents_row_icons .bed p').textContent = beds + ' beds';
+        clonedCard.querySelector('.rents_row_icons .bath p').textContent = baths + ' baths';
+        clonedCard.querySelector('.rents_row_icons .sqft p').textContent = area + ' sqft';
+        clonedCard.querySelector('.bottom_btn .btn_style1 a').textContent = button_1_label;
+        clonedCard.querySelector('.bottom_btn .btn_style2 a').textContent = button_2_label;
+        clonedCard.querySelector('.bottom_btn .btn_style1 a').setAttribute('href', button_1_link);
+        clonedCard.querySelector('.bottom_btn .btn_style2 a').href = button_2_link;
+
+        // Add the cloned card to the HTML cards array
+        cardsHtml.push(clonedCard);
+      }
+
+      // Clear the container and add the HTML card elements to the fragment
+      cardsContainer.innerHTML = '';
+      cardsHtml.forEach((card) => {
+        fragment.appendChild(card);
+      });
+      cardsContainer.appendChild(fragment);
+    } else {
+      // If no cards match the search criteria, display a message in the card container
+      const notFoundMessage = document.createElement('p');
+      notFoundMessage.textContent = 'There are no houses that meet the search conditions.';
+      cardsContainer.innerHTML = '';
+      cardsContainer.appendChild(notFoundMessage);
+    }
+  }
+  // END Function to Render Cards
+
+
+  // Function to create groups of cards to be used in pagination
+  function handlePaginationGroups(arrayCards,cardsPerPage){
+    const paginationGroups = []; // Create an empty array to hold the pagination groups
+    // Loop through the array of cards and slice them into groups of the specified size (Number of cards per page)
+    for (let i = 0; i < arrayCards.length; i += Number(cardsPerPage)) {
+      paginationGroups.push(arrayCards.slice(i, i + Number(cardsPerPage)));
+    }
+    return paginationGroups;
+  }
+  // END - Function Pagination groups
+
+
+  // Cards filter - Returns an array with filtered cards
+  function filterCards(
+  arrayCards,          // Array of card objects to filter
+   citySelect,          // HTML select element for filtering by city
+   stateSelect,         // HTML select element for filtering by state
+   minAreaSelect,       // HTML input element for filtering by minimum area
+   maxAreaSelect,       // HTML input element for filtering by maximum area
+   minBedsSelect,       // HTML input element for filtering by minimum number of bedrooms
+   maxBedsSelect,       // HTML input element for filtering by maximum number of bedrooms
+   minBathsSelect,      // HTML input element for filtering by minimum number of bathrooms
+   maxBathsSelect,      // HTML input element for filtering by maximum number of bathrooms
+   minPriceInput,       // HTML input element for filtering by minimum price
+   maxPriceInput,       // HTML input element for filtering by maximum price
+   checkboxProperties,  // Array of HTML checkbox elements for filtering by house properties
+   checkboxFeatures,    // Array of HTML checkbox elements for filtering by card features
+   searchInput          // HTML input element for text search
+  ) {   
+
+
+    const city = citySelect.value; // Get the value of the city filter    
+    const state = stateSelect.value; // Get the value of the state filter    
+    const minArea = Number(minAreaSelect.value); // Get the value of the minimum area filter and convert it to a number    
+    const maxArea = Number(maxAreaSelect.value); // Get the value of the maximum area filter and convert it to a number    
+    const minBeds = Number(minBedsSelect.value); // Get the value of the minimum beds filter and convert it to a number    
+    const maxBeds = Number(maxBedsSelect.value); // Get the value of the maximum beds filter and convert it to a number    
+    const minBaths = Number(minBathsSelect.value); // Get the value of the minimum baths filter and convert it to a number    
+    const maxBaths = Number(maxBathsSelect.value); // Get the value of the maximum baths filter and convert it to a number    
+    const minPrice = Number(minPriceInput.value); // Get the value of the minimum beds filter and convert it to a number    
+    const maxPrice = Number(maxPriceInput.value); // Get the value of the maximum beds filter and convert it to a number
+    const properties = Array.from(checkboxProperties); // Get all checkboxes for the house properties filter and convert them to an array  
+    const selectedProperties = properties.filter(houseProperty => houseProperty.checked); // Filter the checkboxes to get only the ones that are checked    
+    const selectedPropertiesValues = selectedProperties.map(houseProperty => houseProperty.dataset.value); // Get an array of the values of the selected properties    
+    const features = Array.from(checkboxFeatures); // Get all checkboxes for the features filter and convert them to an array    
+    const selectedFeatures = features.filter(cardFeature => cardFeature.checked); // Filter the checkboxes to get only the ones that are checked    
+    const selectedFeaturesValues = selectedFeatures.map(cardFeature => cardFeature.dataset.value); // Get an array of the values of the selected features   
+    const searchValue = searchInput.value;  // Get the value of the search input filter
+
+    // Filter the arrayCards using the input values
+    const filteredCards = arrayCards.filter(card => {
+      const title = card.title.toLowerCase();
+      const description = card.description.toLowerCase();
+      const search = searchValue.toLowerCase();
+      return title.includes(search) || description.includes(search);
+    }).filter(card => {   
+      if (city && card.city.toLowerCase() !== city.toLowerCase()) return false;
+      if (state && card.state.toLowerCase() !== state.toLowerCase()) return false;
+      if (minArea && card.area < minArea) return false;
+      if (maxArea && card.area > maxArea) return false;
+      if (minBeds && card.beds < minBeds) return false;
+      if (maxBeds && card.beds > maxBeds) return false;
+      if (minBaths && card.baths < minBaths) return false;
+      if (maxBaths && card.baths > maxBaths) return false;
+      if (minPrice && card.price < minPrice) return false;
+      if (maxPrice && card.price > maxPrice) return false;
+      if (selectedPropertiesValues.length > 0) {
+        const allProperties = selectedPropertiesValues.some(property => card.properties.includes(property));
+        if (!allProperties) return false;
+      }        
+      if (selectedFeaturesValues.length > 0) {
+        const allFeatures = selectedFeaturesValues.every(feature => card.features.includes(feature));
+        if (!allFeatures) return false;
+      }
+      return true;
+    });
+
+    // Return the filtered array of card objects
+    return filteredCards;      
+  }
+  // END Funtion to Filter Cards
+
+
+  // Function to render Pagination    
+  function handlePagination(arrayGroupCards, paginationContainer,filteredCards,cardsPerPage) {    
+    paginationContainer.innerHTML = ''; // Clear the contents of the pagination container    
+    const fragment = document.createDocumentFragment();  // Create a new document fragment to hold the pagination links    
+    const cardsLength = arrayGroupCards.length;  // Get the total number of groups (pages) of the array   
+
+    // Function to handle click events on the pagination links
+    function handleClick(index, e) {
+      // Call the renderCards function with the corresponding card data (cards of each page-group)
+      renderCards(
+        arrayGroupCards[index], // card data
+        document.querySelector('.rental_content .inner'), // Cards container
+        document.querySelector('.rentale-model-card .rentale_serach_column') // Card Model
+      );    
+      clearActiveLinks();
+      e.target.classList.add('active');      
+      const totalElements = filteredCards.length;
+      const startElement = index * cardsPerPage + 1;
+      const endElement = index * cardsPerPage + arrayGroupCards[index].length;     
+      const resultsContainer = document.querySelector('.content__results');
+      resultsContainer.textContent = "Showing  " + startElement + " - " + endElement + " of " + totalElements + " total results";
+     }
+
+
+    // Loop through each group (page) in the array
+    for (let page = 0; page < cardsLength; page++) {       
+      const link = document.createElement('a');   // Create a new link element       
+      link.textContent = page + 1; // Set the text ( number ) to each link
+      if(page == 0) link.classList.add('active'); 
+      link.addEventListener("click", (e) => handleClick(page,e)); // Add an event listener to the link to call handleClick with the index of the corresponding group (page)
+      fragment.appendChild(link);  // Add the link element to the document fragment
+    }    
+    paginationContainer.appendChild(fragment); // Append the document fragment containing the links to the pagination container
+  }
+
+  function clearActiveLinks(){
+    document.querySelectorAll('.rental_content__pagination a').forEach( link => {
+      link.classList.remove('active')
+    })
+  }
+  function clearForm(form) {
+    // Iterate over all form elements
+    Array.from(form.elements).forEach(element => {
+      // Clear the value of the element
+      if(element.type == "checkbox") element.checked = false;
+      else element.value = "";
+    });
+  }
+
+  function handleResults() {
+    const totalElements = filteredCards.length;
+    const startElement = index + 1;
+    const endElement = startElement + filteredCards[index].length - 1;      
+    const resultsContainer = document.querySelector('.content__results');
+    resultsContainer.textContent = "Showing  " + startElement + " - " + endElement + " of " + totalElements + " total results";
+  }
+  document.addEventListener("DOMContentLoaded", function(event) {     
+    const mapApiKey = "{{ module.api_key_google }}"; // Maps API Key    
+    const form = document.querySelector('.filters__form'); // Form that has all filters selects, checkbox and inputs
+    // Select for city filter
+    const citySelect = form.querySelector('#city');
+    const stateSelect = form.querySelector('#state');
+    // Selects for Min and Max Area / Sqft filter
+    const minAreaSelect = form.querySelector('#minArea');
+    const maxAreaSelect = form.querySelector('#maxArea');
+    // Selects for Min and MaxBedrooms
+    const minBedsSelect = form.querySelector('#minBeds');
+    const maxBedsSelect = form.querySelector('#maxBeds');
+    // Selects for Min and Max Baths
+    const minBathsSelect = form.querySelector('#minBaths');
+    const maxBathsSelect = form.querySelector('#maxBaths');
+    // Selects for Min and Max Prices
+    const minPriceInput = form.querySelector('#priceMin');
+    const maxPriceInput = form.querySelector('#priceMax');
+
+    const checkboxProperties = form.querySelectorAll('[name="property"]');  // All checkbox for properties filter   
+    const checkboxFeatures = form.querySelectorAll('[name="feature"]');  // All checkbox for features filter    
+    const searchInput = form.querySelector('#search'); // Input for keywords filter    
+    const cardsContainer = document.querySelector('.rental_content .inner'); // Container for all cards    
+    const cardModel = document.querySelector('.rentale-model-card .rentale_serach_column'); // Card that will be cloned to build all cards   
+    const mapTabToggle = document.querySelector('.tab_list__map');  // Map Tab toggle   
+    const paginationContainer = document.querySelector('.rental_content__pagination'); // Container for pagination   
+    const arrayCards = {{ cardsJSON }};     // Cards array   
+    const cardsPerPage = {{ module.style.cards_per_page }};  //  Cards to show per page
+    const resetButton = document.querySelector('.filters__reset-form') // Button to reset all form values   
+    function render(){
+      const filteredCards = filterCards(arrayCards,citySelect, stateSelect, minAreaSelect, maxAreaSelect, minBedsSelect, maxBedsSelect, minBathsSelect, maxBathsSelect,minPriceInput,maxPriceInput, checkboxProperties, checkboxFeatures, searchInput ) ;
+      const groupPaginationCards = handlePaginationGroups(filteredCards,cardsPerPage);   // Generate groups of filtered cards       
+      const activeTabMap = document.querySelector('.tab_list__map.active');  //  know if Map Tab is active 
+      const resultsContainer = document.querySelector('.content__results');
+      handlePagination(groupPaginationCards,paginationContainer,filteredCards,cardsPerPage); //Render Pagination
+      renderCards(groupPaginationCards[0],cardsContainer, cardModel); // Render first page of cards  
+      if(filteredCards.length){
+        resultsContainer.textContent = "Showing  1 - " + groupPaginationCards[0].length + " of " + filteredCards.length + " total results";
+      }else{
+        resultsContainer.textContent = "0 results";
+      }
+
+     if(activeTabMap != null) initMap(filteredCards) // Init Map with filtered Cards 
+    }
+
+    render();
+    form.addEventListener('change', render);     // Event listener for filters
+    mapTabToggle.addEventListener('click',render); // Event listener for mapToggle
+    let searchTimer; // Timer for Search input
+    // Event listener for the input event on searchInput
+    searchInput.addEventListener('input', () => {
+      // Clear the previous timer
+      clearTimeout(searchTimer);
+      // Set a new timer to execute the render function after 700ms
+      searchTimer = setTimeout(() => {
+        render();
+      }, 700);
+    });
+    resetButton.addEventListener('click', ()=>{
+      clearForm(form);
+      render();
+    });
+
+  });
+</script>
+{% end_require_js %} 
+
+
+{% require_css %}
+<style>
+  {% scope_css %}
+  form.filters__form{     background: {{ module.style.filter_bg_color.color }};
+    border: 1px solid {{ module.style.filter_bg_color.color }}; }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,835 @@
+[ {
+  "id" : "5c7df418-024d-8f29-d0ef-0685740a2186",
+  "name" : "custom_class",
+  "display_width" : null,
+  "label" : "Custom Class",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : ""
+}, {
+  "id" : "4e1b1201-8fd5-b18d-dbf2-9d80d288e294",
+  "name" : "section_id",
+  "display_width" : null,
+  "label" : "Section Id",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text"
+}, {
+  "id" : "e9d91472-d4d4-231c-283c-ed737eae5570",
+  "name" : "heading",
+  "display_width" : null,
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text",
+  "default" : "Rental Search"
+}, {
+  "id" : "31d20c4d-d88d-efc9-e6b0-feae53abebce",
+  "name" : "box_group",
+  "display_width" : null,
+  "label" : "Box group",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : "3eeb1483-1fa6-0323-fc34-0e3ad1484241",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "c5edaa33-b2b9-3a61-ff15-67f814e94c69",
+    "name" : "internal_page_link",
+    "display_width" : null,
+    "label" : "Internal Page Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+    "type" : "url",
+    "default" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  }, {
+    "id" : "05d1518d-628d-0a50-a517-8fe8100d5add",
+    "name" : "image_field",
+    "display_width" : null,
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : false,
+    "show_loading" : true,
+    "type" : "image",
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    }
+  }, {
+    "id" : "3eeb1483-1fa6-0323-fc34-0e3ad1484241",
+    "name" : "title",
+    "display_width" : null,
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "validation_regex" : "",
+    "allow_new_line" : false,
+    "show_emoji_picker" : false,
+    "type" : "text",
+    "default" : "Lovely End-Unit Townhome in Hiram!"
+  }, {
+    "id" : "1ab6ecd7-3fbc-7b2a-5aca-27427e3fd0c3",
+    "name" : "sub_title",
+    "display_width" : null,
+    "label" : "Sub Text",
+    "required" : false,
+    "locked" : false,
+    "validation_regex" : "",
+    "allow_new_line" : false,
+    "show_emoji_picker" : false,
+    "type" : "text",
+    "default" : "11 Darbys Crossing Pt Hiram, GA 30141-2298"
+  }, {
+    "id" : "f37e9c3b-f645-5d8c-f0d9-5fd7d53dea20",
+    "name" : "city",
+    "display_width" : null,
+    "label" : "City",
+    "required" : false,
+    "locked" : false,
+    "validation_regex" : "",
+    "allow_new_line" : false,
+    "show_emoji_picker" : false,
+    "type" : "text",
+    "default" : "Miami"
+  }, {
+    "id" : "7655a20b-4c3f-12ee-8013-60f0557f8927",
+    "name" : "state",
+    "display_width" : null,
+    "label" : "State",
+    "required" : false,
+    "locked" : false,
+    "validation_regex" : "",
+    "allow_new_line" : false,
+    "show_emoji_picker" : false,
+    "type" : "text",
+    "default" : "Alaska"
+  }, {
+    "id" : "46d79d36-e415-43fd-e445-38ad2eddc72d",
+    "name" : "price",
+    "display_width" : null,
+    "label" : "Price",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "prefix" : "$",
+    "type" : "number",
+    "default" : 5000
+  }, {
+    "id" : "7545e7d5-748b-2420-85c8-0f29371f9735",
+    "name" : "properties",
+    "display_width" : null,
+    "label" : "Property Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "singlefamily_house", "Single Family House" ], [ "townhouse", "Townhouse" ], [ "apartment", "Apartment" ], [ "duplex", "Duplex" ] ],
+    "multiple" : true,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "default" : [ ]
+  }, {
+    "id" : "8369bc86-6fdb-ee97-ffda-980acec87033",
+    "name" : "features",
+    "display_width" : null,
+    "label" : "Features",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "pets_allowed", "Pets Allowed" ], [ "built_in_wardrobes", "Built In Wardrobes" ], [ "gas", "Gas" ], [ "heating", "Heating" ], [ "balcony", "Balcony" ], [ "garden", "Garden" ], [ "stydy", "Stydy" ], [ "laundry", "Laundry" ], [ "dishwasher", "Dishwasher" ], [ "airconditioning", "Airconditioning" ] ],
+    "multiple" : true,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "default" : [ ]
+  }, {
+    "id" : "9642cc3d-1a9f-d687-bf5e-70454b7e857e",
+    "name" : "product",
+    "display_width" : null,
+    "label" : "Product",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "4ad2a6ea-be06-569f-dc5a-6e8682cb6b45",
+      "name" : "beds",
+      "display_width" : null,
+      "label" : "Beds",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "1", "1" ], [ "2", "2" ], [ "3", "3" ], [ "4", "4" ], [ "5", "5" ], [ "6", "6" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "default" : "1"
+    }, {
+      "id" : "38a7714d-5d00-92eb-0599-3a3a647b70f1",
+      "name" : "baths",
+      "display_width" : null,
+      "label" : "Baths",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "1", "1" ], [ "2", "2" ], [ "3", "3" ], [ "4", "4" ], [ "5", "5" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "default" : "1"
+    }, {
+      "id" : "0df73474-5509-73e8-07b0-8b34f87197da",
+      "name" : "sqft",
+      "display_width" : null,
+      "label" : "Sqft",
+      "required" : false,
+      "locked" : false,
+      "display" : "text",
+      "min" : 0,
+      "max" : 5000,
+      "step" : 250,
+      "suffix" : " Sqft",
+      "type" : "number",
+      "default" : 1000
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "type" : "group",
+    "default" : {
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    }
+  }, {
+    "id" : "e4a94601-d995-abad-f7c4-fd7d80a54e1d",
+    "name" : "button_1",
+    "display_width" : null,
+    "label" : "Button 1",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "877bcebf-8338-ca00-d9b0-de91ddcd4ace",
+      "name" : "button_label",
+      "display_width" : null,
+      "label" : "Label",
+      "required" : false,
+      "locked" : false,
+      "validation_regex" : "",
+      "allow_new_line" : false,
+      "show_emoji_picker" : false,
+      "type" : "text",
+      "default" : "Schedule"
+    }, {
+      "id" : "2edcf753-4687-8fa5-17e6-a00e3047a1ae",
+      "name" : "link",
+      "display_width" : null,
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "CALL_TO_ACTION" ],
+      "type" : "url",
+      "default" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "EXTERNAL"
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "type" : "group",
+    "default" : {
+      "button_label" : "Schedule",
+      "link" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "EXTERNAL"
+      }
+    }
+  }, {
+    "id" : "f4da0f36-3884-adf6-d76a-3efb95c83769",
+    "name" : "button_2",
+    "display_width" : null,
+    "label" : "Button 2",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "f5094c20-4093-7cef-31c5-bc495d63281b",
+      "name" : "button_label",
+      "display_width" : null,
+      "label" : "Label",
+      "required" : false,
+      "locked" : false,
+      "validation_regex" : "",
+      "allow_new_line" : false,
+      "show_emoji_picker" : false,
+      "type" : "text",
+      "default" : "Apply Now "
+    }, {
+      "id" : "931ad577-1e8b-5711-539d-23b4b9866aad",
+      "name" : "link",
+      "display_width" : null,
+      "label" : "URL",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "CALL_TO_ACTION" ],
+      "type" : "url",
+      "default" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "type" : "group",
+    "default" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    }
+  }, {
+    "id" : "787679c1-1c96-12d7-d473-e88a3783c28d",
+    "name" : "coordinates",
+    "display_width" : null,
+    "label" : "Coordinates",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "d6cbad1b-65c6-b261-b18c-06db0fba5533",
+      "name" : "latitude",
+      "display_width" : null,
+      "label" : "Latitude",
+      "required" : false,
+      "locked" : false,
+      "display" : "text",
+      "step" : 1,
+      "type" : "number",
+      "default" : 40.417
+    }, {
+      "id" : "06a0e879-ca11-d5a5-fbb1-64d5bb9fdd10",
+      "name" : "longitude",
+      "display_width" : null,
+      "label" : "Longitude",
+      "required" : false,
+      "locked" : false,
+      "display" : "text",
+      "step" : 1,
+      "type" : "number",
+      "default" : -3.704
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "type" : "group",
+    "default" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "type" : "group",
+  "default" : [ {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    },
+    "title" : "Lovely End-Unit Townhome in Hiram!",
+    "sub_title" : "11 Darbys Crossing Pt Hiram, GA 30141-2298",
+    "city" : "Miami",
+    "state" : "Alaska",
+    "price" : 5000,
+    "properties" : [ ],
+    "features" : [ ],
+    "product" : {
+      "text_3" : "1500 Sqft",
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    },
+    "button_1" : {
+      "button_label" : "Schedule",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "button_2" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    },
+    "coordinates" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    },
+    "internal_page_link" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  }, {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    },
+    "title" : "Lovely End-Unit Townhome in Hiram!",
+    "sub_title" : "11 Darbys Crossing Pt Hiram, GA 30141-2298",
+    "city" : "Miami",
+    "state" : "Alaska",
+    "price" : 5000,
+    "properties" : [ ],
+    "features" : [ ],
+    "product" : {
+      "text_3" : "1500 Sqft",
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    },
+    "button_1" : {
+      "button_label" : "Schedule",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "button_2" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    },
+    "coordinates" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    },
+    "internal_page_link" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  }, {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    },
+    "title" : "Lovely End-Unit Townhome in Hiram!",
+    "sub_title" : "11 Darbys Crossing Pt Hiram, GA 30141-2298",
+    "city" : "Miami",
+    "state" : "Alaska",
+    "price" : 5000,
+    "properties" : [ ],
+    "features" : [ ],
+    "product" : {
+      "text_3" : "1500 Sqft",
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    },
+    "button_1" : {
+      "button_label" : "Schedule",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "button_2" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    },
+    "coordinates" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    },
+    "internal_page_link" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  }, {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    },
+    "title" : "Lovely End-Unit Townhome in Hiram!",
+    "sub_title" : "11 Darbys Crossing Pt Hiram, GA 30141-2298",
+    "city" : "Miami",
+    "state" : "Alaska",
+    "price" : 5000,
+    "properties" : [ ],
+    "features" : [ ],
+    "product" : {
+      "text_3" : "1500 Sqft",
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    },
+    "button_1" : {
+      "button_label" : "Schedule",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "button_2" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    },
+    "coordinates" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    },
+    "internal_page_link" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  }, {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "https://www.geeklymedia.com/hubfs/Imported%20images/Shape%2019%20copy%203@2x.png",
+      "alt" : "Shape 19 copy 3@2x",
+      "loading" : "lazy",
+      "width" : 812,
+      "height" : 741,
+      "max_width" : 812,
+      "max_height" : 741
+    },
+    "title" : "Lovely End-Unit Townhome in Hiram!",
+    "sub_title" : "11 Darbys Crossing Pt Hiram, GA 30141-2298",
+    "city" : "Miami",
+    "state" : "Alaska",
+    "price" : 5000,
+    "properties" : [ ],
+    "features" : [ ],
+    "product" : {
+      "text_3" : "1500 Sqft",
+      "beds" : "1",
+      "baths" : "1",
+      "sqft" : 1000
+    },
+    "button_1" : {
+      "button_label" : "Schedule",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "button_2" : {
+      "button_label" : "Apply Now ",
+      "link" : {
+        "type" : "EXTERNAL",
+        "href" : "https://www.google.com",
+        "content_id" : null
+      }
+    },
+    "coordinates" : {
+      "latitude" : 40.417,
+      "longitude" : -3.704
+    },
+    "internal_page_link" : {
+      "type" : "EXTERNAL",
+      "href" : "https://www-rentbridgegroup-com.sandbox.hs-sites.com/rental-search-inner-page",
+      "content_id" : null
+    }
+  } ]
+}, {
+  "id" : "bb39131a-3205-a84b-e79f-86fc8e24f182",
+  "name" : "style",
+  "display_width" : null,
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "6594ebbe-d768-a101-c02c-afedefd6511e",
+    "name" : "icons",
+    "display_width" : null,
+    "label" : "Icons",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "9cf85e9f-77d0-9544-d93e-0ac8a2439dd9",
+      "name" : "bed_icon",
+      "display_width" : null,
+      "label" : "Bed Icon",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bed-icon.svg",
+        "alt" : "bed-icon",
+        "loading" : "lazy",
+        "width" : 27,
+        "height" : 23,
+        "max_width" : 27,
+        "max_height" : 23
+      }
+    }, {
+      "id" : "4f1b180b-e9f4-ca65-7468-34a0ad235e7b",
+      "name" : "bath_icon",
+      "display_width" : null,
+      "label" : "Bath Icon",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bath-icon.svg",
+        "alt" : "bath-icon",
+        "loading" : "lazy",
+        "width" : 20,
+        "height" : 20,
+        "max_width" : 20,
+        "max_height" : 20
+      }
+    }, {
+      "id" : "782ebc42-58e3-358c-f2b1-60468e573f24",
+      "name" : "sqft_icon",
+      "display_width" : null,
+      "label" : "Sqft Icon",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/sqft-icon.svg",
+        "alt" : "sqft-icon",
+        "loading" : "lazy",
+        "width" : 22,
+        "height" : 22,
+        "max_width" : 22,
+        "max_height" : 22
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "type" : "group",
+    "default" : {
+      "bed_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bed-icon.svg",
+        "alt" : "bed-icon",
+        "loading" : "lazy",
+        "width" : 27,
+        "height" : 23,
+        "max_width" : 27,
+        "max_height" : 23
+      },
+      "bath_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bath-icon.svg",
+        "alt" : "bath-icon",
+        "loading" : "lazy",
+        "width" : 20,
+        "height" : 20,
+        "max_width" : 20,
+        "max_height" : 20
+      },
+      "sqft_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/sqft-icon.svg",
+        "alt" : "sqft-icon",
+        "loading" : "lazy",
+        "width" : 22,
+        "height" : 22,
+        "max_width" : 22,
+        "max_height" : 22
+      }
+    }
+  }, {
+    "id" : "b13d6b29-6be2-2b02-9af8-09fb42f723c2",
+    "name" : "cards_per_page",
+    "display_width" : null,
+    "label" : "Cards per page",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 1,
+    "max" : 10,
+    "step" : 1,
+    "type" : "number",
+    "default" : 5
+  }, {
+    "id" : "f69f1925-c21d-b5c4-8048-d3a18dc6e658",
+    "name" : "cards_animation",
+    "display_width" : null,
+    "label" : "Cards Animation",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "zoomIn", "Zoom in" ], [ "fadeIn", "Fade in" ], [ "none", "None" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "default" : "zoomIn"
+  }, {
+    "id" : "03f3d721-e925-6c45-847a-2ebca076b7e7",
+    "name" : "filter_bg_color",
+    "display_width" : null,
+    "label" : "Filter BG Color",
+    "required" : false,
+    "locked" : false,
+    "show_opacity" : false,
+    "type" : "color",
+    "default" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "type" : "group",
+  "default" : {
+    "icons" : {
+      "bed_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bed-icon.svg",
+        "alt" : "bed-icon",
+        "loading" : "lazy",
+        "width" : 27,
+        "height" : 23,
+        "max_width" : 27,
+        "max_height" : 23
+      },
+      "bath_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/bath-icon.svg",
+        "alt" : "bath-icon",
+        "loading" : "lazy",
+        "width" : 20,
+        "height" : 20,
+        "max_width" : 20,
+        "max_height" : 20
+      },
+      "sqft_icon" : {
+        "size_type" : "auto",
+        "src" : "https://www.geeklymedia.com/hubfs/sqft-icon.svg",
+        "alt" : "sqft-icon",
+        "loading" : "lazy",
+        "width" : 22,
+        "height" : 22,
+        "max_width" : 22,
+        "max_height" : 22
+      }
+    },
+    "cards_per_page" : 5,
+    "cards_animation" : "zoomIn",
+    "filter_bg_color" : {
+      "color" : "#FFFFFF",
+      "opacity" : 100
+    }
+  }
+}, {
+  "id" : "b8184e5b-2018-9fe1-50d6-76ef7ccb46aa",
+  "name" : "api_key_google",
+  "display_width" : null,
+  "label" : "API KEY Google",
+  "required" : false,
+  "locked" : false,
+  "validation_regex" : "",
+  "allow_new_line" : false,
+  "show_emoji_picker" : false,
+  "type" : "text"
+} ]

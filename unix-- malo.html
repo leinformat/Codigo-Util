@@ -1,0 +1,42 @@
+/// MALO
+
+
+<h2 style="text-align: center; font-size: 24px; line-height: 28px;">Macro Roundup: <span style="color: red;">Weekly</span></h2>
+{% set currentDay = datetimeformat(local_dt,'%A') %}
+{% set currentDayNumber = datetimeformat(local_dt,'%e')|trim|convert_to('integer') %}
+{% set dayOffset = 6 if currentDay == 'Sunday' else 0 if currentDay == 'Monday' else 1 if currentDay == 'Tuesday' else 2 if currentDay == 'Wednesday' else 3 if currentDay == 'Thursday' else 4 if currentDay == 'Friday' else 5 %}
+{% set newDate = currentDayNumber - dayOffset %}
+
+{% if newDate < 1 %}
+    {% set previousMonthIndex = datetimeformat(local_dt, "%m")|convert_to('integer') %}
+    {% set year = datetimeformat(local_dt, "%Y")|convert_to('integer') %}
+    {% if previousMonthIndex == 1 %}
+        {% set previousMonthIndex = 12 %}
+        {% set year = year - 1 %}
+    {% else %}
+        {% set previousMonthIndex = previousMonthIndex - 1 %}
+    {% endif %}
+    {% set monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+    {% set daysInPreviousMonth = 31 if previousMonthIndex in [1, 3, 5, 7, 8, 10, 12] else 30 if previousMonthIndex in [4, 6, 9, 11] else 28 if previousMonthIndex == 2 and not year|divisibleby(4) else 29 %}
+    {% set previousMonday = daysInPreviousMonth + newDate + 1 %}
+    <p style="text-align: center; color: #222222; font-size: 17px; line-height: 20px; font-style: italic;"> Week of {{ monthNames[previousMonthIndex - 1] }} {{ previousMonday }}, {{ year }}</p>
+{% else %}
+    <p style="text-align: center; color: #222222; font-size: 17px; line-height: 20px; font-style: italic;"> Week of {{ datetimeformat(local_dt, "%B") }} {{ newDate }}, {{ datetimeformat(local_dt, "%Y") }}</p>
+{% endif %}
+
+<div style="text-align: center; font-size: 15px; line-height: 20px; color: #6b6d6f;">Summary of Economic Articles &amp; Papers<br>From Ed Conard's Researchers</div>
+
+/// BUENO
+<h2 style="text-align: center; font-size: 24px; line-height: 28px;">Macro Roundup: <span style="color: red;">Weekly</span></h2>
+	{% set currentDay = local_dt %}
+	{% set dayIndex = currentDay|format_date('e') %}
+  
+	{% set unix = local_dt|unixtimestamp %}
+	
+	{% set lastDay = unix - ( dayIndex * 86400000) %}
+	
+	{% set realDate = dayIndex == 7 ? currentDay : lastDay %}
+	
+	<p class="first" style="text-align: center; color: #222222; font-size: 17px; line-height: 20px; font-style: italic;"> Week of {{ realDate|format_date('MMMM d, yyy')  }}</p>
+
+	<div style="text-align: center; font-size: 15px; line-height: 20px; color: #6B6D6F;">Summary of Economic Articles &amp; Papers<br>From Ed Conard's Researchers</div>

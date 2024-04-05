@@ -1,0 +1,15 @@
+{# {{ ((unix - 86400000))|format_date('EEE, MMM d')  }}  #}
+	
+	
+	
+	<h2 style="text-align: center; font-size: 24px; line-height: 28px;">Macro Roundup: <span style="color: red;">Weekly</span></h2>
+	{% set currentDay = local_dt %}
+	{% set dayIndex = currentDay|format_date('e') %}
+  
+	{% set unix = local_dt|unixtimestamp %}
+	
+	{% set lastDay = unix - ( dayIndex * 86400000) %}
+	
+	<p class="first" style="text-align: center; color: #222222; font-size: 17px; line-height: 20px; font-style: italic;"> Week of {{ lastDay|format_date('MMMM d')  }}</p>
+
+	<div style="text-align: center; font-size: 15px; line-height: 20px; color: #6B6D6F;">Summary of Economic Articles &amp; Papers<br>From Ed Conard's Researchers</div>

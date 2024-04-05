@@ -1,0 +1,12 @@
+<style>      
+      #footer .cm-top-footer>.row-fluid-wrapper:last-child>.row-fluid {
+        display:flex;
+      }
+      .cm-header-wrapper .page-center {
+          max-width: 1920px !important;
+          margin: auto;
+      }
+      .row-fluid [class*="span"] {
+          margin: auto;
+      }
+    </style>

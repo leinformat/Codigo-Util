@@ -1,0 +1,447 @@
+{
+  "label": "Quatenary",
+  "name": "quaternary",
+  "type": "group",
+  "inline_help_text": "Add '.button .button--quaternary' if you want to use it as a css class",
+  "children": [
+     {
+  "label": "Font",
+  "name": "font",
+  "type": "font",
+  "visibility": {
+    "controlling_field": "8c646d79-a205-7883-9f42-20ad6ec4f4a3",
+    "controlling_value_regex": "false",
+    "hidden_subfields": {
+      "color": true,
+      "size": true
+    },
+    "operator": "EQUAL"
+  },
+  "display_width": null,
+  "load_external_fonts": true,
+  "locked": false,
+  "required": false,
+  "inherited_value": {
+    "property_value_paths": {
+      "fallback": "theme.typography.fonts.primary.fallback",
+      "font": "theme.typography.fonts.primary.font",
+      "font_set": "theme.typography.fonts.primary.font_set",
+      "variant": "theme.buttons.primary.font.variant"
+    }
+  },
+  "default": {
+    "size": null,
+    "styles": null,
+    "fallback": null,
+    "size_unit": null,
+    "color": null,
+    "variant": null,
+    "font": null,
+    "style": null,
+    "font_set": "DEFAULT"
+  }
+},
+     {
+  "label": "Text transform",
+  "name": "text_transform",
+  "type": "choice",
+  "display": "select",
+  "display_width": null,
+  "locked": false,
+  "choices": [
+    [
+      "none",
+      "None"
+    ],
+    [
+      "capitalize",
+      "Capitalize"
+    ],
+    [
+      "uppercase",
+      "Uppercase"
+    ],
+    [
+      "lowercase",
+      "Lowercase"
+    ]
+  ],
+  "required": false,
+  "default": "none"
+},
+     {
+  "label": "Text Color (default)",
+  "name": "text_color",
+  "type": "color",
+  "display_width": null,
+  "locked": false,
+  "required": false,
+  "default": {
+    "color": "#ffffff",
+    "opacity": 100
+  }
+},
+     {
+  "label": "Background color",
+  "name": "bg_color",
+  "type": "color",
+  "display_width": null,
+  "locked": false,
+  "required": false,
+  "inherited_value": {
+    "property_value_paths": {
+      "color": "theme.colors.tertiary.color"
+    }
+  },
+  "default": {
+    "color": "#011A43",
+    "opacity": 100
+  }
+},
+{
+    "label": "Border",
+    "name": "border",
+    "type": "group",
+    "children": [
+      {
+        "label": "Style",
+        "name": "style",
+        "id": "theme.buttons.quaternary.border.style",
+        "type": "choice",
+        "display": "select",
+        "display_width": null,
+        "locked": false,
+        "choices": [
+          [
+            "none",
+            "None"
+          ],
+          [
+            "solid",
+            "Solid"
+          ],
+          [
+            "dotted",
+            "Dotted"
+          ],
+          [
+            "dashed",
+            "Dashed"
+          ],
+          [
+            "double",
+            "Double"
+          ],
+          [
+            "groove",
+            "Groove"
+          ],
+          [
+            "ridge",
+            "Ridge"
+          ],
+          [
+            "inset",
+            "Inset"
+          ],
+          [
+            "outset",
+            "Outset"
+          ]
+        ],
+        "required": false,
+        "default": "solid"
+      },
+      {
+        "label": "Width",
+        "name": "width",
+        "type": "number",
+        "help_text": "Value is in pixels",
+        "visibility": {
+          "controlling_field": "theme.buttons.tertiary.border.style",
+          "controlling_value_regex": "none",
+          "operator": "NOT_EQUAL"
+        },
+        "display": "slider",
+        "max": 100,
+        "display_width": null,
+        "locked": false,
+        "step": 1,
+        "min": 1,
+        "required": false,
+        "default": 1
+      },
+      {
+        "label": "Color",
+        "name": "color",
+        "type": "color",
+        "visibility": {
+          "hidden_subfields": {
+            "opacity": true
+          }
+        },
+        "display_width": null,
+        "locked": false,
+        "required": false,
+        "inherited_value": {
+          "property_value_paths": {
+            "color": "theme.colors.tertiary.color"
+          }
+        },
+        "default": {
+          "color": null,
+          "opacity": null
+        }
+      },
+      {
+        "label": "Corner radius",
+        "name": "corner_radius",
+        "type": "number",
+        "display": "slider",
+        "max": 300,
+        "suffix": "px",
+        "display_width": null,
+        "locked": false,
+        "step": 1,
+        "min": 0,
+        "required": false,
+        "default": 0
+      },
+      {
+        "label": "Add Subtle Drop Shadow:",
+        "name": "drop_shadow",
+        "id": "d07fc3aa-7088-a867-a8da-97b78a439d47",
+        "type": "boolean",
+        "display": "checkbox",
+        "display_width": null,
+        "locked": false,
+        "required": false,
+        "default": false
+      },
+      {
+        "label": "Drop Shadow Color:",
+        "name": "shadow_color",
+        "type": "color",
+        "visibility": {
+          "controlling_field": "d07fc3aa-7088-a867-a8da-97b78a439d46",
+          "controlling_value_regex": "true",
+          "operator": "EQUAL"
+        },
+        "display_width": null,
+        "locked": false,
+        "required": false,
+        "default": {
+          "color": "#000000",
+          "opacity": 10
+        }
+      },
+      {
+        "label": "Drop Shadow Size (px):",
+        "name": "drop_shadow_size",
+        "type": "number",
+        "visibility": {
+          "controlling_field": "d07fc3aa-7088-a867-a8da-97b78a439d46",
+          "controlling_value_regex": "true",
+          "operator": "EQUAL"
+        },
+        "display": "slider",
+        "max": 50,
+        "display_width": null,
+        "locked": false,
+        "step": 1,
+        "min": 0,
+        "required": false,
+        "default": 20
+      }
+    ],
+    "display_width": null,
+    "locked": false,
+    "tab": "CONTENT",
+    "expanded": false,
+    "required": false,
+    "default": {
+      "width": 1,
+      "corner_radius": 0,
+      "drop_shadow": false
+    }
+  },
+  {
+    "label": "Hover",
+    "name": "hover",
+    "type": "group",
+    "children": [
+               {
+                "label": "Text Color (default)",
+                "name": "text_color",
+                "type": "color",
+                "display_width": null,
+                "locked": false,
+                "required": false,
+                "inherited_value": {
+                  "property_value_paths": {
+                    "color": "theme.colors.quaternary.color"
+                  }
+                },
+                "default": {
+                  "color": "#011A43",
+                  "opacity": 100
+                }
+              },
+               {
+              "label": "Background color",
+              "name": "bg_color",
+              "type": "color",
+              "display_width": null,
+              "locked": false,
+              "required": false,
+              "inherited_value": {
+                "property_value_paths": {
+                  "color": "theme.colors.quaternary.color"
+                }
+              },
+              "default": {
+                "color": "#011A43",
+                "opacity": 0
+              }
+            },
+               {
+                "label": "Expand on Hover:",
+                "name": "expand_on_hover",
+                "type": "boolean",
+                "help_text": "By turning this on, the button will very subtly become larger when someone hovers over it.",
+                "display": "checkbox",
+                "display_width": null,
+                "locked": false,
+                "required": false,
+                "default": true
+              },
+               {
+                 "label": "Border",
+                 "name": "border",
+                 "type": "group",
+                 "children": [
+                   {
+                    "label": "Style",
+                    "name": "style",
+                    "id": "theme.buttons.quaternary.hover.border.style",
+                    "type": "choice",
+                    "display": "select",
+                    "display_width": null,
+                    "locked": false,
+                     "choices": [
+                         [
+                          "none",
+                          "None"
+                        ],
+                       [
+                        "solid",
+                        "Solid"
+                        ],
+                        [
+                          "dotted",
+                          "Dotted"
+                        ],
+                        [
+                          "dashed",
+                          "Dashed"
+                        ],
+                        [
+                          "double",
+                          "Double"
+                        ],
+                        [
+                          "groove",
+                          "Groove"
+                        ],
+                        [
+                          "ridge",
+                          "Ridge"
+                        ],
+                        [
+                          "inset",
+                          "Inset"
+                        ],
+                        [
+                          "outset",
+                          "Outset"
+                        ]
+                     ],
+                     "required": false,
+                     "inherited_value": {
+                        "default_value_path": "theme.buttons.tertiary.border.style"
+                     }
+
+
+                   },
+                   {
+                      "label": "Width",
+                      "name": "width",
+                      "type": "number",
+                      "help_text": "Value is in pixels",
+                      "visibility": {
+                        "controlling_field": "theme.buttons.tertiary.hover.border.style",
+                        "controlling_value_regex": "none",
+                        "operator": "NOT_EQUAL"
+                      },
+                      "display": "slider",
+                      "max": 100,
+                      "display_width": null,
+                      "locked": false,
+                      "step": 1,
+                      "min": 1,
+                      "required": false,
+                      "inherited_value": {
+                        "default_value_path": "theme.buttons.tertiary.border.width"
+                      }
+                    },
+                   {
+                      "label": "Color",
+                      "name": "color",
+                      "type": "color",
+                      "visibility": {
+                        "controlling_field": "theme.buttons.tertiary.hover.border.style",
+                        "controlling_value_regex": "none",
+                        "hidden_subfields": {
+                          "opacity": true
+                        },
+                        "operator": "NOT_EQUAL"
+                      },
+                      "display_width": null,
+                      "locked": false,
+                      "required": false,
+                      "inherited_value": {
+                        "property_value_paths": {
+                          "color": "theme.buttons.tertiary.border.color.color"
+                        }
+                      },
+                      "default": {
+                        "color": null,
+                        "opacity": null
+                      }
+                    }
+                 ],
+                 "display_width": null,
+                  "locked": false,
+                  "tab": "CONTENT",
+                  "expanded": false,
+                  "required": false
+                }
+]
+  }
+],
+    "display_width": null,
+        "locked": false,
+        "tab": "CONTENT",
+        "expanded": false,
+        "required": false,
+        "default": {
+          "text_color": {
+            "color": "#011A43",
+            "opacity": 100
+          },
+          "bg_color": {
+            "color": "#011A43",
+            "opacity": 0
+          }
+        }
+  }

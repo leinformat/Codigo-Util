@@ -1,0 +1,33 @@
+.banner{
+    min-height: 70vh;
+    background-image: url('https://fondosmil.com/fondo/11760.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.header{
+    border-bottom: red solid 2px;
+    background-color: aliceblue;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+.menu li{
+    padding: 10px 20px;
+}
+.content{
+    width: 720px;
+    margin: auto;
+}
+.sticky{
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+.ocultar{
+    background-color: blueviolet;
+    color: azure;
+    padding: 20px;
+}

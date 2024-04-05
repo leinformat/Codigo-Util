@@ -1,0 +1,96 @@
+{% set up_icon ='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>' %}
+{% set down_icon ='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>' %}
+<section class="blog-tags-tab">
+	{# Tab Buttons Desktop #}
+	<div class="blog-tags-tab__tab-titles blog-tags-tab--tab-button-desktop">
+		{% for tag in module.add_edit_tag_data %}
+		  <h4 class="blog-section__tab-title blog-tags-tab__title {{ 'active' if loop.first }}" data-id="tab-{{ loop.index }}" data-type="{{ tag.information_from }}">{{ tag.tab_title if tag.tab_title else tag.blog_tag }}</h4>
+		{% endfor %}
+	</div>
+	{# Tab Buttons Mobile #}
+	<p class="blog-section__select-title">Categories</p>
+	<select class="blog-tags-tab__tabs-select blog-tags-tab--tab-button-mobile">
+		{% for tag in module.add_edit_tag_data %}
+		  <option class="" {{ 'selected' if loop.first }} data-id="tab-{{ loop.index }}" data-type="{{ tag.information_from }}">{{ tag.tab_title if tag.tab_title else tag.blog_tag }}</option>
+		{% endfor %}
+	</select>
+	{% for tag in module.add_edit_tag_data %}
+	<div class="blog-section__tab-content blog-tags-tab__tab-content {{ 'active' if loop.first }}" data-id="tab-{{ loop.index }}">
+		{% if tag.information_from == "blog" %}
+			{% set tag_formatter = tag.blog_tag|lower|replace(' ','-')|regex_replace("-&-", "-") %}
+			{% set tag_posts = blog_recent_tag_posts("default", tag_formatter , 200) %}
+			{% if tag_posts|length %}
+			<h4>{{ tag.tab_title if tag.tab_title else tag.blog_tag }}</h4>
+			<div class="blog-index  post-listing ">
+				{% for tag_post in tag_posts %}
+				<div class="blog-index__post blog-index__post--small  post-item">
+					{% if not simple_list_page %}
+					<div class="blog-index__post-inner-card{% if not tag_post.featured_image %} no-image{% endif %}">
+						{% if tag_post.featured_image %}
+						<a class="blog-tags-tab__post-image"  href="{{ tag_post.absolute_url }}">
+							<img class="blog-tags-tab__image" loading="lazy" alt="{{ tag_post.name }}" src="{{ tag_post.featured_image }}" >
+						</a>
+						{% endif %}
+						<div class="blog-tags-tab__post-content">
+							<div class="">
+								{# tag_post.publish_date_local_time.strftime('%B %e, %Y') #}
+								<h2>{{ tag_post.name|truncate(58, True, "...") }}</h2>
+								<div class="blog-index__post-description">{{ tag_post.post_list_content|truncatehtml(module.description_text_truncate)|safe if module.description_text_truncate else tag_post.post_list_content|safe }}</div>
+							</div>
+							<div class="blog-post__read-more">
+								<a href="{{ tag_post.absolute_url }}">Read More</a>
+							</div>
+						</div>
+					</div>
+					{% else %}
+					<h2 class="post-listing-simple"><a href="{{tag_post.absolute_url}}">{{ tag_post.name }}</a></h2>
+					{% endif %}
+				</div>
+				{% endfor %}
+			</div>
+			{% else %}
+				<p>There are no posts</p>
+			{% endif %}
+			{% else %}
+		  {# Description #}
+			<div class="blog-tags-tab__text-content">
+				<div class="blog-tags-tab__internal-Search custom-blog-search-wrap">
+						<input style="border-radius:0;" class="hs-search-field__input blog-tags-tab__Search-input" type="text" placeholder="Search...">
+					  <div class="blog-tags-tab__text-matches">
+							<!--
+							<span class="blog-tags-tab__matches-actual">0</span>/
+              -->
+              <span class="blog-tags-tab__matches-total">0</span>
+						</div>
+						<div class="blog-tags-tab__text-matches-arrows">
+							<div class="blog-tags-tab__matches-up">
+							  {{ up_icon }}
+							</div>
+							<div class="blog-tags-tab__matches-down">
+								{{ down_icon }}
+							</div>							
+						</div>
+					</div>
+				<div class="blog-tags-tab__text-content-text">
+					{{ tag.text_content }}
+				</div>
+			</div>
+		 {% endif %}
+	</div>
+	{% endfor %}
+</section>
+
+{%  require_css  %}
+  <style>
+    {% scope_css %}
+			.blog-tags-tab__image{
+				max-width:{{ module.style.image.max_width~'px' }};
+				max-height:{{ module.style.image.max_height~'px' }};
+				min-height:{{ module.style.image.min_height~'px' }};
+			}
+			.blog-tags-tab__tab-titles {
+				justify-content: {{ module.style.tabs.tabs_horizontal_align }};
+			}
+			{%  end_scope_css %}
+  </style>
+{% end_require_css %}

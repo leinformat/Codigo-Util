@@ -1,0 +1,26 @@
+{#Container #}
+{# Loop start #}
+{% for item in module.edit %}
+<table width="100%" style="margin-bottom:30px;margin-left:30px;">
+  <tr>
+    {# Imagen #}
+    <td align="center" style="width:5%;vertical-align: text-bottom;">
+        {% if item.image_field.src %}
+          {% set sizeAttrs = 'width="{{ item.image_field.width }}" height="{{ item.image_field.height }}"' %}
+          {% if item.image_field.size_type == 'auto' %}
+            {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+          {% elif item.image_field.size_type == 'auto_custom_max' %}
+            {% set sizeAttrs = 'width="{{ item.image_field.max_width }}" height="{{ item.image_field.max_height }}" style="max-width: 100%; height: auto;"' %}
+          {% endif %}
+           {% set loadingAttr = item.image_field.loading != 'disabled' ? 'loading="{{ item.image_field.loading }}"' : '' %}
+          <img src="{{ item.image_field.src }}" alt="{{ item.image_field.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+        {% endif %}
+    </td>
+    <td style="width:50%;padding-right:80px">
+         {# Text #}
+         {% inline_rich_text field="richtext_field" value="{{ item.richtext_field }}" %}
+    </td>
+  </tr>
+</table>
+{% endfor %}
+{# end of loop #}

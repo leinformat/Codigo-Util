@@ -1,0 +1,6 @@
+.container img{
+    transition: all .9s ease;
+}
+.hide__image{
+    opacity: 0;
+}

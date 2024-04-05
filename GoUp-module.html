@@ -1,0 +1,53 @@
+{% require_css %}
+<style>
+  {% scope_css %}
+  .button-up{
+    background: linear-gradient(90deg, #FAB8A4 0%, #F2693A 50.78%);
+    border: 1px solid #F2693A;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    text-align:center;
+    position:fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 10;
+    cursor: pointer;
+    transition: all 300ms ease;
+   }
+  
+  @media (max-width: 768px) {      
+    }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+<div id="button-up" class="button-up">
+  {% if module.image_field.src %}
+  <div>
+    {% set sizeAttrs = 'width="{{ module.image_field.width }}" height="{{ module.image_field.height }}"' %}
+      {% if module.image_field.size_type == 'auto' %}
+        {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+      {% elif module.image_field.size_type == 'auto_custom_max' %}
+        {% set sizeAttrs = 'width="{{ module.image_field.max_width }}" height="{{ module.image_field.max_height }}" style="max-width: 100%; height: auto;"' %}
+      {% endif %}
+       {% set loadingAttr = module.image_field.loading != 'disabled' ? 'loading="{{ module.image_field.loading }}"' : '' %}
+      <img src="{{ module.image_field.src }}" alt="{{ module.image_field.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+    {% endif %}
+  </div>	
+</div>
+{% require_js %}
+  <script>
+      const button = document.getElementById('button-up')
+      
+      button.addEventListener('click', scrollUp);
+    
+      function scrollUp(){
+        const currentScroll = document.documentElement.scrollTop;
+        
+        if(currentScroll > 0){
+          window.requestAnimationFrame(scrollUp);
+          window.scrollTo(0,currentScroll - (currentScroll / 10));
+        } 
+      } 
+  </script>
+{% end_require_js %}

@@ -1,0 +1,171 @@
+.rentale-model-card{
+  display: none;
+}
+
+.filters__form input[type=email],
+.filters__form input[type=file],
+.filters__form input[type=number],
+.filters__form input[type=password],
+.filters__form input[type=tel],
+.filters__form input[type=text],
+.filters__form select,
+.filters__form textarea{
+  border-radius: 0;
+  border: 1px solid #e5e5e5;
+}
+
+.filters__form input[type="checkbox"]{
+  position: absolute;
+  z-index: 2;
+  display: block;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+}
+.rents_row_icons,
+.map-marker-popup__properties{
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.rents_row_icons > div,
+.map-marker-popup__properties > div {
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  border-right: solid 1px #000000;
+  column-gap: 5px;
+}
+.rents_row_icons > div > span,
+.map-marker-popup__icon{
+  display: block;
+  width: 30px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.rents_row_icons > div > p,
+.map-marker-popup__properties > div > p{
+  margin-top: 0;
+}
+
+.filters__form label{
+  color: #000000;
+}
+
+.rental_content__pagination{
+  column-gap: 10px;
+  display: flex; 
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.rental_content__pagination a{
+  padding: 10px;
+  color: #0254C9;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #0254C950;
+  font-weight: 700;
+}
+.rental_content__pagination a.active {
+  background-color: #fc5c33;
+  color: #fff;
+  border-color: #0254C9;
+}
+
+.rental_content__pagination a:hover:not(.active) {
+  background-color: #fc5c33;
+  color: white;
+}
+
+.rental_content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
+.rentale_serach_column--animate {  
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+.rentale_serach_column--animate-delay1{
+  animation-delay: 0.1s;
+}
+.rentale_serach_column--animate-delay2{
+  animation-delay: 0.2s;
+}
+.rentale_serach_column--animate-delay3{
+  animation-delay: 0.3s;
+}
+.rentale_serach_column--animate-delay4{
+  animation-delay: 0.4s;
+}
+.rentale_serach_column--animate-delay4{
+  animation-delay: 0.5s;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.rental_content.rental_content__map{
+  min-height: 500px;
+}
+
+.rental_content__map .map{
+  height: 100%;
+}
+
+.map-marker-popup{
+  display: flex;
+  flex-direction: column;
+}
+
+.map-marker-popup__content{
+  padding: 20px;
+}
+
+.map-marker-popup__content p{
+  margin-top: 0;
+}
+ 
+.map-marker-popup__price{
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 25px;
+  color: #fc5c33;
+}
+.map-marker-popup__button{
+  background-color: #FC5C33;
+  color: white;
+  font-weight: 700;
+  padding: 15px;
+  text-align: center;
+}
+.rentale-model-card__internal-link{
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+.rents_innerdetails__link:hover{
+  text-decoration:none;
+} 

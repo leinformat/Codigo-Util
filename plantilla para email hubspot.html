@@ -1,0 +1,38 @@
+<div id="section-6" class="hse-section" style="padding-left:10px; padding-right:10px; background-color:#ffffff" bgcolor="#ffffff">
+     <div class="hse-column-container" style="min-width:280px; max-width:600px; width:100%; Margin-left:auto; Margin-right:auto; border-collapse:collapse; border-spacing:0">
+        <div id="column-6-0" class="hse-column hse-size-4">
+          <div id="hs_cos_wrapper_module-6-0-0" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;">
+          <table  class="hse-image-wrapper" role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt">
+              <tbody>
+                  <tr>
+                      <td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; word-break:break-word; text-align:center;">
+                          {% if module.image_field.src %}
+                          {% set sizeAttrs = 'width="{{ module.image_field.width }}" height="{{ module.image_field.height }}"' %}
+                          {% if module.image_field.size_type == 'auto' %}
+                            {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                          {% elif module.image_field.size_type == 'auto_custom_max' %}
+                            {% set sizeAttrs = 'width="{{ module.image_field.max_width }}" height="{{ module.image_field.max_height }}" style="max-width: 100%; height: auto;"' %}
+                          {% endif %}
+                           {% set loadingAttr = module.image_field.loading != 'disabled' ? 'loading="{{ module.image_field.loading }}"' : '' %}
+                          <img style="margin-right:20px; padding: 15px 10px 10px;" src="{{ module.image_field.src }}" alt="{{ module.image_field.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                        {% endif %}
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+        </div>
+
+        <div id="column-6-1" class="hse-column hse-size-8">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt">
+            <tbody>
+              <tr>
+                <td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; word-break:break-word">
+                  {% inline_rich_text field="text" value="{{ module.text }}" %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+     </div>   
+</div>

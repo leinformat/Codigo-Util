@@ -1,0 +1,261 @@
+{% from '../../templates/macros/macros.html' import color %}
+
+{#***************** COLORS **********************#}
+{# --- GENERAL CONTAINER - CARDS  - TABS --- #}
+{% set bg_general_container = color(module.styles.general_container.background_color, module.styles.general_container.background_custom_color.css)|trim %}
+{% set card_title_color = color(module.styles.cards.title.title_color, module.styles.cards.title.custom_title_color.css)|trim %}
+{% set card_tag_color = color(module.styles.cards.tags.tag_color, module.styles.cards.tags.custom_tag_color.css)|trim %}
+{% set bg_tag_color = color(module.styles.cards.tags.background_color, module.styles.cards.tags.background_custom.css)|trim %}
+{% set default_tab_text_color = color(module.styles.tabs.default.text_color, module.styles.tabs.default.custom_text_color.css)|trim %}
+{% set bg_default_tab_color = color(module.styles.tabs.default.background_color, module.styles.tabs.default.background_custom.css)|trim %}
+{% set active_tab_text_color = color(module.styles.tabs.active.text_color, module.styles.tabs.active.custom_text_color.css)|trim %}
+{% set bg_active_tab_color = color(module.styles.tabs.active.background_color, module.styles.tabs.active.background_custom.css)|trim %}
+
+{# --- PAGINATION --- #}
+{% set bg_color_number_default = color(module.styles.pagination.numbers.default.background_color, module.styles.pagination.numbers.default.custom_background.css)|trim %}
+{% set default_number_color = color(module.styles.pagination.numbers.default.number_color,module.styles.pagination.numbers.default.custom_number_color.css)|trim %}
+{% set bg_color_number_active = color(module.styles.pagination.numbers.active.background_color, module.styles.pagination.numbers.active.custom_background.css)|trim %}
+{% set active_number_color = color(module.styles.pagination.numbers.active.number_color,module.styles.pagination.numbers.active.custom_number_color.css)|trim %}
+
+{% set arrow_color = color(module.styles.pagination.arrows.default.arrow_color,module.styles.pagination.arrows.default.custom_arrow_color.css)|trim %}
+{% set bg_color_arrow_default = color(module.styles.pagination.arrows.default.background_color, module.styles.pagination.arrows.default.custom_background.css)|trim %}
+
+{% set arrow_inactive_color = color(module.styles.pagination.arrows.inactive.arrow_color,module.styles.pagination.arrows.inactive.arrow_custom_color.css)|trim %}
+{% set bg_color_inactive = color(module.styles.pagination.arrows.inactive.background_color, module.styles.pagination.arrows.inactive.custom_background.css)|trim %}
+
+
+{#***************** GRID CARDS **********************#}
+{% set widthCardDesktop = 100 / module.styles.columns_to_show.desktop.columns ~ '%' %}
+{% set totalGapDesktop = ( ( module.styles.columns_to_show.desktop.columns - 1 ) /  module.styles.columns_to_show.desktop.columns ) * module.styles.columns_to_show.desktop.column_gap ~ 'px' %}
+{% set widthCardTablet = 100 / module.styles.columns_to_show.tablet.columns ~ '%' %}
+{% set totalGapTablet = ( ( module.styles.columns_to_show.tablet.columns - 1 ) /  module.styles.columns_to_show.tablet.columns ) * module.styles.columns_to_show.tablet.column_gap ~ 'px' %}
+{% set widthCardMobile = 100 / module.styles.columns_to_show.mobile.columns ~ '%' %}
+{% set totalGapMobile = ( ( module.styles.columns_to_show.mobile.columns - 1 ) /  module.styles.columns_to_show.mobile.columns ) * module.styles.columns_to_show.mobile.column_gap ~ 'px' %}
+
+
+{# Module styles #}
+{% require_css %}
+<style>
+  {% scope_css %}
+	{#***************** GENERAL CONTAINER **********************#}
+	.blog-tabs__tab-items-container{
+		border-radius: 0 0 {{ module.styles.general_container.border_radius~'px' }} {{ module.styles.general_container.border_radius~'px' }};
+		background-color:{{bg_general_container}};
+		{{ module.styles.general_container.spacing.desktop.css }}
+	}
+	.blog-tabs__tabs-item{
+		background-color:{{bg_general_container}};
+	}
+	{#***************** TABS **********************#}
+	.blog-tabs__tab-button{
+		color:{{default_tab_text_color}};
+		background-color:{{bg_default_tab_color}};
+		border-radius: {{ module.styles.tabs.border_radius~'px' }} {{ module.styles.tabs.border_radius~'px' }} 0 0;
+		{{ module.styles.tabs.default.border.css }}
+	}
+	.blog-tabs__tab-button.tab-active{
+		background-color:{{bg_active_tab_color}};
+		color: {{active_tab_text_color}};
+		{{ module.styles.tabs.active.border.css }}
+	}
+	{#***************** CARDS **********************#}
+	.blog-tabs__card-posts,
+	.blog-tabs__card-popular-posts{
+		justify-content: {{ module.styles.columns_to_show.desktop.horizontal_alignment }};
+		column-gap:{{ module.styles.columns_to_show.desktop.column_gap ~'px' }};
+		row-gap:{{ module.styles.columns_to_show.desktop.row_gap ~'px'}};
+	}
+	.blog-tabs__card{
+		border-radius: {{ module.styles.cards.border_radius~'px' }};
+		background: linear-gradient({{ module.styles.cards.gradient.angle }}deg, {{ module.styles.cards.gradient.color_1.css }} {{ module.styles.cards.gradient.color_1_stop }}%,{{ module.styles.cards.gradient.color_2.css }} {{ module.styles.cards.gradient.color_2_stop }}%);
+		width: calc( {{ widthCardDesktop }}  - {{ totalGapDesktop }} );
+	}
+	.blog-tabs__text-content{
+		{{ module.styles.cards.spacing.desktop.css }}
+	}
+	.blog-tabs__post-title{
+		color:{{card_title_color}};
+	}
+	.blog-tabs__tag-link{
+		color: {{card_tag_color}};
+	}
+	.blog-tabs__tag{
+		background-color: {{bg_tag_color}};
+		border-radius:{{ module.styles.cards.tags.border_radius~'px' }};
+	}
+	{#***************** PAGINATION **********************#}
+	.blog-tabs .pagination__link{
+		background-color: {{ bg_color_number_default }};
+		color: {{default_number_color}};
+		border-radius: {{ module.styles.pagination.border_radius~'px' }};
+		font-size:{{ module.styles.pagination.numbers.number_size~'px' }};
+		{{ module.styles.pagination.numbers.default.border.css }}
+	}
+	.blog-tabs .pagination__link--active{
+		background-color: {{bg_color_number_active}};
+		color: {{active_number_color}};
+		{{ module.styles.pagination.numbers.active.border.css }}
+	}
+	.blog-tabs .pagination__link--prev,
+	.blog-tabs .pagination__link--next{
+		background-color: {{bg_color_arrow_default}};
+		color: {{arrow_color}};
+		{{ module.styles.pagination.arrows.default.border.css }}
+	}
+	.blog-tabs .pagination__link--disabled{
+		background-color:{{bg_color_inactive}};
+		color:{{arrow_inactive_color}});
+		{{ module.styles.pagination.arrows.inactive.border.css }}	
+	}
+
+  @media(max-width: 992px){
+		{#***************** GENERAL CONTAINER **********************#}
+		.blog-tabs__tab-items-container{
+			{{ module.styles.general_container.spacing.tablet.css }}
+		}
+		{#***************** CARDS **********************#}
+		.blog-tabs__card-posts,
+		.blog-tabs__card-popular-posts{
+			column-gap:{{ module.styles.columns_to_show.tablet.column_gap ~'px' }};
+			row-gap:{{ module.styles.columns_to_show.tablet.row_gap ~'px'}};
+			justify-content: {{ module.styles.columns_to_show.tablet.horizontal_alignment }};
+		}
+		.blog-tabs__card{
+			width: calc( {{ widthCardTablet }}  - {{ totalGapTablet }} );
+		}
+		.blog-tabs__text-content{
+			{{ module.styles.cards.spacing.tablet.css }}
+		}
+  }
+  @media(max-width: 765px){
+		{#***************** GENERAL CONTAINER **********************#}
+		.blog-tabs__tab-items-container{
+			{{ module.styles.general_container.spacing.mobile.css }}
+		}
+		{#***************** CARDS **********************#}
+		.blog-tabs__card-posts,
+		.blog-tabs__card-popular-posts{
+			column-gap:{{ module.styles.columns_to_show.mobile.column_gap ~'px' }};
+			row-gap:{{ module.styles.columns_to_show.mobile.row_gap ~'px'}};
+			justify-content: {{ module.styles.columns_to_show.mobile.horizontal_alignment }};
+		}
+		.blog-tabs__card{
+			width: calc( {{ widthCardMobile }}  - {{ totalGapMobile }} );
+		}
+		.blog-tabs__text-content{
+			{{ module.styles.cards.spacing.mobile.css }}
+		}
+  }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+
+{# THIS MACRO DEFINES THE TEMPLATE FOR A SINGLE POST CARD #}
+{% macro cardTemplate(post) %}
+<div class="blog-tabs__card">
+	<figure class="blog-tabs__image-container">
+	  <img class="blog-tabs__post-image" src="{{ post.featured_image }}" alt="{{ post.featured_image_alt_text }}" width="100%" height="100%" loading="lazy">
+	</figure>
+	<article class="blog-tabs__text-content">
+		<div class="blog-tabs__tags-container">
+			{% if post.tag_list %}
+				{% for tag in post.tag_list %}
+					{% if loop.index <= 1%}
+					<h6 class="blog-tabs__tag">
+						<a class="blog-tabs__tag-link" href="{{ blog_tag_url(group.id, tag.slug) }}" tabindex="{{loop.index}}">
+							{{ tag.name }}
+						</a>
+					</h6>
+					{% if not loop.last %},{% endif %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+		<header class="blog-tabs__title-container">
+			<h3 class="blog-tabs__post-title">{{ post.name|truncate(42,'...') }}</h3>
+		</header>
+		<div class="blog-tabs__button-container  button--{{ module.styles.button.position }}">
+			<a class="button button--{{ module.styles.button.type }} button--{{ module.styles.button.size }}" href="{{ post.absolute_url }}" tabindex="{{loop.index}}">
+				{{ module.text_button }}
+			</a>
+		</div>
+	</article>
+</div>
+{% endmacro %}
+
+<section class="blog-tabs">
+	<div class="blog-tabs__container">
+		{#***************** TABS CONTAINER **********************#}
+		<ul data-current-tag="{{tag}}" class="blog-tabs__tabs-titles">
+			{% for item in module.add_edit_tab %}
+			{% set blogTag = item.tag|lower|replace(" ","-") %}
+			{% set blog_url = item.post_types != "tag" ? group.absolute_url : group.absolute_url~'/tag/'~blogTag %}
+			<li data-tag="{{ blogTag }}" class="blog-tabs__tab-button {{ 'tab-active' if loop.first }}" data-type="{{item.post_types}}" data-index="{{loop.index}}" data-url="{{ blog_url }}">{{ item.tab_title }}</li>
+			{% endfor %}
+		</ul>
+    {#***************** ITEMS CONTAINER **********************#}
+		<div class="blog-tabs__tab-items-container">
+			<div class="blog-tabs__loader-container">
+        <div class="blog-tabs__loader"></div>
+				<p>Loading...</p>
+			</div>
+		{% for item in module.add_edit_tab %}
+		<div class="blog-tabs__tabs-item {{ 'tab-active' if loop.first }} blog-tabs__tabs-item--{{loop.index}}">
+			{#***************** RECENTS POSTS - POSTS BY TAGS **********************#}
+			{% if item.post_types != "popular" %}
+			<div class="blog-tabs__recents-by-tag">
+				<div class="blog-tabs__card-posts">
+					{% for post in contents %}
+					{# CARDS RENDER #}
+					{{ cardTemplate(post) }}
+					{% endfor %}
+				</div>
+				{#***************** PAGINATION **********************#}
+				{% if contents.total_page_count > 1 %}
+					{% set page_list = [-2, -1, 0, 1, 2] %}
+					{% if contents.total_page_count - current_page_num == 1 %}{% set offset = -1 %}
+					{% elif contents.total_page_count - current_page_num == 0 %}{% set offset = -2 %}
+					{% elif current_page_num == 2 %}{% set offset = 1 %}
+					{% elif current_page_num == 1 %}{% set offset = 2 %}
+					{% else %}{% set offset = 0 %}{% endif %}
+					<div class="blog-tabs__pagination-container pagination">
+            {# PREV LINK #}
+						<a data-type="{{item.post_types}}" data-page="decrement" class="pagination__link pagination__link--prev {{ "pagination__link--disabled" if not last_page_num }}" href="{{ blog_page_link(last_page_num) }}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+								<path d="M2.59311 5.53353L7.9338 0.193114C8.19128 -0.0643713 8.60898 -0.0643713 8.86646 0.193114L9.48943 0.81608C9.74664 1.07329 9.74691 1.48988 9.49053 1.74764L5.25782 5.99986L9.49025 10.2524C9.74691 10.5101 9.74636 10.9267 9.48915 11.1839L8.86619 11.8069C8.6087 12.0644 8.19101 12.0644 7.93352 11.8069L2.59311 6.46619C2.33562 6.20871 2.33562 5.79102 2.59311 5.53353Z" fill="currentColor"/>
+							</svg>
+						</a>
+						
+						{% for page in page_list %}
+						{% set this_page = current_page_num + page + offset %}
+						{% if this_page > 0 and this_page <= contents.total_page_count %}
+						{# LINK NUMBERS #}
+						<a data-page-number="{{ this_page }}" data-type="{{item.post_types}}" class="pagination__link pagination__link--number {{ "pagination__link--active" if this_page == current_page_num }}" aria-label="Go to Page {{ this_page }}" {{ 'aria-current="true"' if this_page == current_page_num }} href="{{ blog_page_link(this_page) }}">{{ this_page }}</a>
+						{% endif %}
+						{% endfor %}
+						
+						{# NEXT LINK #}
+						<a data-type="{{item.post_types}}" data-page="increment" class="pagination__link pagination__link--next {{ "pagination__link--disabled" if not next_page_num }}"{% if next_page_num %} href="{{ blog_page_link(current_page_num + 1) }}"{% endif %}>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+								<path d="M9.48947 5.53353L4.14877 0.193114C3.89129 -0.0643713 3.4736 -0.0643713 3.21611 0.193114L2.59314 0.81608C2.33593 1.07329 2.33566 1.48988 2.59204 1.74764L6.82475 5.99986L2.59232 10.2524C2.33566 10.5101 2.33621 10.9267 2.59342 11.1839L3.21639 11.8069C3.47387 12.0644 3.89156 12.0644 4.14905 11.8069L9.48947 6.46619C9.74695 6.20871 9.74695 5.79102 9.48947 5.53353Z" fill="currentColor"/>
+							</svg>
+						</a>
+					</div>
+					{% endif %}
+			</div>
+			{% else %}
+			{#***************** POPULAR POSTS **********************#}
+			{% set popularPosts = blog_popular_posts('default', 6) %}
+			<div class="blog-tabs__card-popular-posts">
+				{% for popular in  popularPosts %}
+				{# CARDS RENDER #}
+				{{ cardTemplate(popular) }}
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+		{% endfor %}
+		</div>
+	</div>
+</section>

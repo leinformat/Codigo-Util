@@ -1,0 +1,27 @@
+{# CONTAINER #}
+<div style="padding-bottom:20px;padding-top:30px;min-height:323px;background-image: url('{{ module.background.src }}'); background-repeat: no-repeat;background-size: cover;background-position: center center;" class="container-baner__image">
+   {% inline_rich_text field="title" value="{{ module.title }}" %}
+  <hr style="width:90%;color:#F2F3F8;margin-top:20px;margin-bottom:20px">
+  {% for item in module.items %}
+    {# Items LOOP #}
+    <div style="margin-left:60px;margin-bottom:20px;margin-right:20px;">
+      {% if item.item_icon.src %}
+      {% set sizeAttrs = 'width="{{ item.item_icon.width }}" height="{{ item.item_icon.height }}"' %}
+      {% if item.item_icon.size_type == 'auto' %}
+        {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+      {% elif item.item_icon.size_type == 'auto_custom_max' %}
+        {% set sizeAttrs = 'width="{{ item.item_icon.max_width }}" height="{{ item.item_icon.max_height }}" style="max-width: 100%; height: auto;"' %}
+      {% endif %}
+       {% set loadingAttr = item.item_icon.loading != 'disabled' ? 'loading="{{ item.item_icon.loading }}"' : '' %}
+      {# Image #}
+      <div style="margin-right:10px;display:inline-block; margin-bottom:5px;">
+        <img style="" src="{{ item.item_icon.src }}" alt="{{ item.item_icon.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+       </div> 
+      {% endif %}
+      {# Text #}
+      <div style="display:inline-block; margin-right:55px">        
+          {% inline_rich_text field="richtext_field" value="{{ item.richtext_field }}" %}            
+      </div>   
+    </div>
+  {% endfor %}
+</div>

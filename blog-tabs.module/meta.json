@@ -1,0 +1,10 @@
+{
+  "global" : false,
+  "content_types" : [ "BLOG_LISTING", "BLOG_POST" ],
+  "master_language" : "en",
+  "icon" : "fontawesome-5.14.0:table:SOLID",
+  "host_template_types" : [ "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 156569441937,
+  "label" : "Blog Tabs",
+  "is_available_for_new_content" : true
+}

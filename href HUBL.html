@@ -1,0 +1,5 @@
+{% elif item3.link.url.type is equalto "PHONE_NUMBER" %}
+{% set href = "tel:" + href %}
+{% elif !href %}
+{% set href = "javascript:;" %}
+{% endif %}

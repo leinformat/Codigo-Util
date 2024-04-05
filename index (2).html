@@ -1,0 +1,448 @@
+<div class="section-day-night ">
+  <div class="section-day-night__center">
+    <div class="section-day-night__circle">
+      {# ****** SKY ******#}
+      <div class="section-day-night__sky"></div>
+      {# ****** SUN ******#}
+      <div class="section-day-night__sun"></div>
+      {# ****** MOON ******#}
+      <div class="section-day-night__moon"></div>
+      {# ****** PYRAMID LEFT SIDE ******#}
+      <div class="section-day-night__pyramid-left"></div>
+      {# ****** PYRAMID RIGHT SIDE ******#}
+      <div class="section-day-night__pyramid-right"></div>
+      {# ****** PYRAMID  SHADOW******#}
+      <div class="section-day-night__pyramid-shadow"></div>
+      {# ****** PYRAMID GROUND ******#}
+      <div class="section-day-night__ground"></div>
+    </div>
+  </div>
+
+  
+{# ****** Toggle Buttons ******#}
+  <div class="change-buttons">    
+    <input type="radio" id="check-1" name="rd" checked />
+    <label class="change-buttons__circle" for="check-1" id="c1"></label>
+    <input type="radio" id="check-2" name="rd"/>
+    <label class="change-buttons__circle" for="check-2" id="c2"></label>
+    <div class="change-buttons__active"></div>  
+  </div>
+
+</div>
+
+
+
+{% require_css %}
+<style>
+  {% scope_css %}
+
+  .section-day-night {   
+    width: 400px;
+    height: 400px;  
+    background: #272c34;
+    position: relative;
+  }
+
+  .section-day-night__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .section-day-night__circle {
+    position: relative;
+    overflow: hidden;    
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+  }
+
+  .section-day-night__sky {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 124px;
+    background: #7ddffc;
+
+    /*{# ** Here the animation to turns the sky blue **#}*/
+        animation: section-day-night__sky-turns-blue 6s linear 1;
+        animation-fill-mode: forwards;  
+  }
+
+  {# ** Here the animation to turns the sky black **#}
+  .section-day-night--night .section-day-night__sky{
+    animation: section-day-night__sky-turns-black 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+
+  {# ****** Keyframes for day to night animation  ******#}
+  @keyframes section-day-night__sky-turns-black {
+    0% {
+        background: #7ddffc;
+    }
+    100% {
+        background: #003;
+    }
+  }
+
+   {# ****** Keyframes for night to day animation  ******#}
+  @keyframes section-day-night__sky-turns-blue {
+    0% {
+        background: #003;
+    }
+    100% {
+        background: #7ddffc;
+    }
+  }
+
+  
+  .section-day-night__sun {
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    left: 73px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffef00;
+    transform-origin: 17px 120px;
+    transform: rotate(165deg);
+   
+    /*{# ** Here the animation when the sun goes up **#}*/
+    animation: section-day-night__sun-goes-up 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+
+  /*{# ** Here the animation when the sun goes down **#}*/
+  .section-day-night--night  .section-day-night__sun {
+    animation: section-day-night__sun-goes-down 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+
+  {# ****** Keyframes for animation when sun goes down ******#}
+  @keyframes section-day-night__sun-goes-down {
+    0% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(165deg);
+    }
+  }
+  
+  
+  {# ****** Keyframes for animation when sun goes up ******#}
+  @keyframes section-day-night__sun-goes-up {
+    0% {
+        transform: rotate(165deg);
+    }
+    100% {
+        transform: rotate(345deg);
+    }
+  }
+
+  .section-day-night__moon {
+    position: absolute;
+    z-index: 2;
+    top: 7px;
+    left: 73px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: white;
+    transform-origin: 17px 120px;
+    transform: rotate(-15deg);
+    
+    /*{# ** Here the animation when the moon goes down **#}*/
+    animation: section-day-night__moon-goes-down 6s linear 1;
+    animation-fill-mode: forwards;  
+  }
+  
+  {# ** Here the animation when the moon goes up **#}
+  .section-day-night--night  .section-day-night__moon {
+    animation: section-day-night__moon-goes-up 6s linear 1;
+    animation-fill-mode: forwards;  
+  }
+
+  {# ****** Keyframes for animation when moon goes up ******#}
+  @keyframes section-day-night__moon-goes-up {
+    0% {
+        transform: rotate(165deg);
+    }
+    100% {
+        transform: rotate(345deg);
+    }
+  }
+
+  {# ****** Keyframes for animation when moon goes down ******#}
+  @keyframes section-day-night__moon-goes-down {
+    0% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(165deg);
+    }
+  }
+
+  .section-day-night__pyramid-left {
+    position: absolute;
+    top: 67px;
+    left: 35px;
+    height: 57px;
+    width: 116px;
+    background: #f4f4f4;
+    clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+    /*{# ** Here the animation for the pyramid left side shadow - day **#}*/
+    animation: pyramide-shading-left 6s linear 1;
+    animation-fill-mode: forwards; 
+  }
+
+  {# ** Here the animation for the pyramid left side shadow - Night **#}
+  .section-day-night--night .section-day-night__pyramid-left {
+    animation: pyramide-shading-left-night 6s linear 1;
+    animation-fill-mode: forwards; 
+  }
+
+  .section-day-night__pyramid-right {
+    position: absolute;
+    top: 67px;
+    left: 93px;
+    height: 57px;
+    width: 58px;
+    background: #dddada;
+    clip-path: polygon(30% 100%, 100% 100%, 0% 0%);
+    /*{# ** Here the animation for the pyramid right side shadow - day **#}*/
+    animation: pyramide-shading-right 6s linear 1;
+    animation-fill-mode: forwards;  
+  }
+
+  {# ** Here the animation for the pyramid right side shadow - night **#}
+  .section-day-night--night .section-day-night__pyramid-right {
+    animation: pyramide-shading-right-night 6s linear 1;
+    animation-fill-mode: forwards;  
+  }
+
+  {# ****** Keyframes for pyramide shading - Day  ******#}
+  @keyframes pyramide-shading-right {
+    0% {
+        background: #dddada;
+    }
+    50% {
+        background: #f4f4f4;
+    }
+    100% {
+        background: #dddada;
+    }
+  }
+  @keyframes pyramide-shading-right-night {
+    0% {
+        background: #dddada;
+    }
+    50% {
+        background: #f4f4f4;
+    }
+    100% {
+        background: #dddada;
+    }
+  }
+  
+  {# ****** Keyframes for pyramide shading - Night  ******#}
+  @keyframes pyramide-shading-left {
+    0% {
+        background: #f4f4f4;
+    }
+    50% {
+        background: #dddada;
+    }
+    100% {
+        background: #f4f4f4;
+    }
+  }
+    @keyframes pyramide-shading-left-night {
+    0% {
+        background: #f4f4f4;
+    }
+    50% {
+        background: #dddada;
+    }
+    100% {
+        background: #f4f4f4;
+    }
+  }
+
+  .section-day-night__pyramid-shadow {
+    position: absolute;
+    z-index: 2;
+    top: 124px;
+    left: -80px;
+    height: 30px;
+    width: 360px;
+    background: rgba(0, 0, 0, 0.2);
+    transform-origin: 50% 0%;
+    clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    /*{# ** Here the animation for the ground shadow - day **#}*/
+    animation: section-day-night__pyramid-shadow-on-the-floor 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+
+  {# ** Here the animation for the ground shadow - night **#}
+  .section-day-night--night .section-day-night__pyramid-shadow {
+    animation: section-day-night__pyramid-shadow-on-the-floor2 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+
+
+  {# ****** Keyframes for ground shadow animation - Day  ******#}
+  @keyframes section-day-night__pyramid-shadow-on-the-floor {
+    0% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    }
+    10% {
+        clip-path: polygon(115px 0%, 231px 0%, 48% 70%)
+    }
+    25% {
+      clip-path: polygon(115px 0%, 231px 0%, 10% 100%);
+    }
+    45% {
+        clip-path: polygon(115px 0%, 231px 0%, 10% 0%);
+    }
+    60% {
+        clip-path: polygon(115px 0%, 231px 0%, 48% -70%);
+    }
+    75% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 20%);
+    }
+    100% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    }
+  }
+
+  {# ****** Keyframes for ground shadow animation - Night   ******#}
+  @keyframes section-day-night__pyramid-shadow-on-the-floor2 {
+    0% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    }
+    10% {
+        clip-path: polygon(115px 0%, 231px 0%, 48% 70%)
+    }
+    25% {
+      clip-path: polygon(115px 0%, 231px 0%, 10% 100%);
+    }
+    45% {
+        clip-path: polygon(115px 0%, 231px 0%, 10% 0%);
+    }
+    60% {
+        clip-path: polygon(115px 0%, 231px 0%, 48% -70%);
+    }
+    75% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 20%);
+    }
+    100% {
+        clip-path: polygon(115px 0%, 231px 0%, 80% 100%);
+    }
+  }
+
+  .section-day-night__ground {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #f0de75;   
+    /*animation: ground-color 6s linear 1;
+    animation-fill-mode: forwards;*/
+  }
+/*  .section-day-night--night .section-day-night__pyramid-shadow {
+    animation: ground-color-night 6s linear 1;
+    animation-fill-mode: forwards;
+  }
+  @keyframes ground-color-night {
+    0% {
+        background: #f0de75;
+    }
+    100% {
+        background: #847a40;
+    }
+  }
+  @keyframes ground-color {
+    0% {
+        background: #847a40;
+    }
+    100% {
+        background: #f0de75;
+    }
+  }*/
+
+  {# ****** Toggle buttons ******#}
+
+  .change-buttons {
+    width: 400px;
+    height: 100px;    
+    border-radius: 2px;    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #272c34;
+  }
+
+  .change-buttons input[type="radio"]{
+    display: block;
+    visibility: hidden;
+  }
+  
+  .change-buttons__circle {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 5;
+    top: 35px;
+    left: 150px;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  #c2 {
+    left: 210px;
+  }
+
+  .change-buttons__active {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 40px;
+    transition: all ease 1s;
+  }
+
+  #check-1:checked ~ .change-buttons__active {
+    left: 155px;
+  }
+
+  #check-2:checked ~ .change-buttons__active {
+    left: 215px;
+  }
+
+  {% end_scope_css %}
+</style>
+{% end_require_css %} 
+
+{% require_js %}
+<script>
+    let button1 = document.querySelector('#c1');
+    let button2 = document.querySelector('#c2');
+    let contenedor = document.querySelector('.section-day-night');
+
+    button2.addEventListener('click',()=>{
+        contenedor.classList.add('section-day-night--night');
+    })
+
+    button1.addEventListener('click',()=>{
+        contenedor.classList.remove('section-day-night--night');
+    })
+</script>
+{% end_require_js %} 
